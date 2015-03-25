@@ -4,8 +4,8 @@
 
         options = options || {};
 
-        this.recordName = options.recordName || "result"; //for showing a count of results
-        this.recordNamePlural = options.recordNamePlural || "results";
+        this.recordName = options.recordName || "location"; //for showing a count of results
+        this.recordNamePlural = options.recordNamePlural || "locations";
         this.searchRadius = options.searchRadius || 805; //in meters ~ 1/2 mile
 
         // the encrypted Table ID of your Fusion Table (found under File => About)
@@ -92,6 +92,7 @@
         self.fusionTable = self.searchrecords;
         self.searchrecords.setMap(map);
         self.getCount(whereClause);
+        self.getList(whereClause);
     };
 
 
@@ -288,6 +289,48 @@
         });
         $("#result_box").fadeIn();
     };
+
+    MapsLib.prototype.getList = function(whereClause) {
+        var self = this;
+        var selectColumns = "Name, 'Full Address', Type, Tag, Phone, Fax";
+
+        self.query({
+            select: selectColumns,
+            where: whereClause,
+            orderBy: 'Name'
+        }, function (json) {
+            self.displayList(json);
+        });
+    }
+
+    MapsLib.prototype.displayList = function(json) {
+        var self = this;
+        
+        var data = json['rows'];
+        var template = '';
+
+        var results = $('#results_list');
+        results.hide().empty(); //hide the existing list and empty it out first
+
+        if (data == null) {
+            //clear results list
+            results.append("<tr><td colspan='6'>No results found</td></tr>");
+        }
+        else {
+            for (var row in data) {
+                template = "\
+                  <tr>\
+                      <td><strong>" + data[row][0] + "</strong></td>\
+                      <td>" + data[row][1] + "</td>\
+                      <td>" + data[row][2] + ", " + data[row][3] + "</td>\
+                      <td>" + data[row][4] + "</td>\
+                      <td>" + data[row][5] + "</td>\
+                  </tr>";
+                results.append(template);
+            }
+        }
+        results.fadeIn();
+    }
 
     MapsLib.prototype.addCommas = function (nStr) {
         nStr += '';

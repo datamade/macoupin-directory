@@ -9,6 +9,8 @@
     <!-- Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/custom.css"/>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -54,14 +56,21 @@
                 </select>
               </label>
             </p>
-            <a class='btn btn-primary' id='search' href='#'>
-              <i class='glyphicon glyphicon-search'></i>
-              Search
-            </a>
-            <a class='btn btn-default' id='reset' href='#'>
-              <i class='glyphicon glyphicon-repeat'></i>
-              Reset
-            </a>
+            <p class='pull-left'>
+              <a class='btn btn-primary' id='search' href='#'>
+                <i class='glyphicon glyphicon-search'></i>
+                Search
+              </a>
+              <a class='btn btn-default' id='reset' href='#'>
+                <i class='glyphicon glyphicon-repeat'></i>
+                Reset
+              </a>
+            </p>
+
+            <p class='pull-right'>
+              <a class='btn btn-default' id='viewmode'><i class='fa fa-list'></i> List view</a>
+            </p>
+            <div class='clearfix'></div>
           </div>
           <div class='alert alert-info' id='result_box' ><strong id='result_count'></strong></div>
         </div>
@@ -73,6 +82,21 @@
             </div>
           </noscript>
           <div id='map_canvas'></div>
+          <div id='listview' style='display: none;'>
+            <h2>Macoupin Resource Directory</h2>
+            <table class='table'>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Location type</th>
+                  <th><i class='fa fa-phone'></i> Phone</th>
+                  <th><i class='fa fa-print'></i> Fax</th>
+                </tr>
+              </thead>
+              <tbody id='results_list'></tbody>
+            </table>
+          </div>
           <p class='pull-right'>
             <a href='http://derekeder.com/searchable_map_template/'>Searchable Map Template</a> by <a href='http://derekeder.com'>Derek Eder</a>.
         </p>
@@ -98,10 +122,9 @@
           var myMap = new MapsLib({
             fusionTableId:      "1I0WbX_UTesTpZWNH8GRpVrVjyBO8MN2wnoNkv9Kw",
             googleApiKey:       "AIzaSyA3FQFrNr5W2OEVmuENqhb2MBB2JabdaOY",
-            locationColumn:     "geometry",
+            locationColumn:     "'Full Address'",
             map_center:         [39.276807, -89.934306],
-            defaultZoom:        9,
-            locationScope:      "Macoupin, IL"
+            defaultZoom:        9
           });
 
           var autocomplete = new google.maps.places.Autocomplete(document.getElementById('search_address'));
@@ -131,6 +154,21 @@
             myMap.reset(); 
             return false;
           });
+
+
+          $('#viewmode').click(function(){
+            if ($('#map_canvas').is(":visible")){
+              $('#viewmode').html("<i class='fa fa-map-marker'></i> Map view");
+              $('#listview').show();
+              $('#map_canvas').hide();
+          }
+
+          else {
+            $('#viewmode').html("<i class='fa fa-list'></i> List view");
+            $('#map_canvas').show();
+              $('#listview').hide();
+          } 
+           });
           
           $(":text").keydown(function(e){
               var key =  e.keyCode ? e.keyCode : e.which;
