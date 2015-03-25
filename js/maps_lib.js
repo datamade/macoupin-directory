@@ -57,6 +57,7 @@
         self.searchrecords = null;
 
         //reset filters
+        $("#name_address").val(self.convertToPlainString($.address.parameter('name')));
         $("#search_address").val(self.convertToPlainString($.address.parameter('address')));
         var loadRadius = self.convertToPlainString($.address.parameter('radius'));
         if (loadRadius != "") 
@@ -167,6 +168,13 @@
         if ( $("#cbType2").is(':checked')) searchType += "2,";
         if ( $("#cbType3").is(':checked')) searchType += "3,";
         self.whereClause += " AND " + searchType.slice(0, searchType.length - 1) + ")";
+        
+
+        var name_search = $("#name_search").val().replace("'", "\\'");
+        if (name_search != '') {
+            self.whereClause += " AND 'Name' contains ignoring case '" + name_search + "'";
+            $.address.parameter('name', encodeURIComponent(name_search));
+        }
         //-----end of custom filters-----
 
         self.getgeoCondition(address, function (geoCondition) {
@@ -177,6 +185,7 @@
     };
 
     MapsLib.prototype.reset = function () {
+        $.address.parameter('name','');
         $.address.parameter('address','');
         $.address.parameter('radius','');
         window.location.reload();
