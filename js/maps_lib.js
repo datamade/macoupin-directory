@@ -154,6 +154,12 @@
         self.whereClause = self.locationColumn + " not equal to ''";
         
         //-----custom filters-----
+        var type_column = "'Type ID'";
+        var searchType = type_column + " IN (-1,";
+        if ( $("#cbType1").is(':checked')) searchType += "1,";
+        if ( $("#cbType2").is(':checked')) searchType += "2,";
+        if ( $("#cbType3").is(':checked')) searchType += "3,";
+        self.whereClause += " AND " + searchType.slice(0, searchType.length - 1) + ")";
         //-----end of custom filters-----
 
         self.getgeoCondition(address, function (geoCondition) {
@@ -318,8 +324,12 @@
         }
         else {
             for (var row in data) {
+                var type_color = 'green';
+                if (data[row][2] == 'Local Government') type_color = 'blue';
+                if (data[row][2] == 'Community Services') type_color = 'red';
                 template = "\
                   <tr>\
+                      <td><span class='filter-box filter-" + type_color + "'></span></td>\
                       <td><strong>" + data[row][0] + "</strong></td>\
                       <td>" + data[row][1] + "</td>\
                       <td>" + data[row][2] + ", " + data[row][3] + "</td>\
