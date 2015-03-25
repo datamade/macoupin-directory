@@ -30,8 +30,12 @@
         this.map_centroid = new google.maps.LatLng(options.map_center[0], options.map_center[1]);
         
         // marker image for your searched address
-        this.addrMarkerImage = options.addrMarkerImage || 'images/blue-pushpin.png';
+        if (options.addrMarkerImage != "")
+            this.addrMarkerImage = options.addrMarkerImage;
+        else
+            this.addrMarkerImage = ""
     
+        console.log(this.addrMarkerImage)
     	this.currentPinpoint = null;
     	$("#result_count").html("");
         
@@ -126,13 +130,16 @@
                     else if (self.searchRadius >= 805) map.setZoom(15); // 1/2 mile
                     else if (self.searchRadius >= 400) map.setZoom(16); // 1/4 mile
                     else self.map.setZoom(17);
-                    self.addrMarker = new google.maps.Marker({
-                        position: self.currentPinpoint,
-                        map: self.map,
-                        icon: self.addrMarkerImage,
-                        animation: google.maps.Animation.DROP,
-                        title: address
-                    });
+
+                    if (self.addrMarkerImage != '') {
+                        self.addrMarker = new google.maps.Marker({
+                            position: self.currentPinpoint,
+                            map: self.map,
+                            icon: self.addrMarkerImage,
+                            animation: google.maps.Animation.DROP,
+                            title: address
+                        });
+                    }
                     var geoCondition = " AND ST_INTERSECTS(" + self.locationColumn + ", CIRCLE(LATLNG" + self.currentPinpoint.toString() + "," + self.searchRadius + "))";
                     callback(geoCondition);
                     self.drawSearchRadiusCircle(self.currentPinpoint);
