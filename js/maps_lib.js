@@ -35,7 +35,6 @@
         else
             this.addrMarkerImage = ""
     
-        console.log(this.addrMarkerImage)
     	this.currentPinpoint = null;
     	$("#result_count").html("");
         
@@ -186,6 +185,7 @@
 
     MapsLib.prototype.reset = function () {
         $.address.parameter('name','');
+        $("#name_search").val("");
         $.address.parameter('address','');
         $.address.parameter('radius','');
         window.location.reload();
