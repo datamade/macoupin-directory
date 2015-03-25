@@ -21,7 +21,7 @@
         this.locationColumn = options.locationColumn || "geometry";
         
         // appends to all address searches if not present
-        this.locationScope = options.locationScope || "chicago";
+        this.locationScope = options.locationScope || "";
 
         // zoom level when map is loaded (bigger is more zoomed in)
         this.defaultZoom = options.defaultZoom || 11; 
