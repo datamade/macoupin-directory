@@ -346,9 +346,8 @@
                 template = "\
                   <tr>\
                       <td><span class='filter-box filter-" + type_color + "'></span></td>\
-                      <td><strong>" + data[row][0] + "</strong></td>\
+                      <td><strong>" + data[row][0] + "</strong><br /><small>" + data[row][2] + "<br />" + data[row][3] + "</small></td>\
                       <td>" + data[row][1] + "</td>\
-                      <td>" + data[row][2] + "<br />" + data[row][3] + "</td>\
                       <td>";
 
                 if (data[row][4] != "") 
