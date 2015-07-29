@@ -56,7 +56,7 @@
         self.searchrecords = null;
 
         //reset filters
-        $("#name_address").val(self.convertToPlainString($.address.parameter('name')));
+        $("#name_search").val(self.convertToPlainString($.address.parameter('name')));
         $("#search_address").val(self.convertToPlainString($.address.parameter('address')));
         var loadRadius = self.convertToPlainString($.address.parameter('radius'));
         if (loadRadius != "") 
@@ -171,7 +171,7 @@
 
         var name_search = $("#name_search").val().replace("'", "\\'");
         if (name_search != '') {
-            self.whereClause += " AND 'Name' contains ignoring case '" + name_search + "'";
+            self.whereClause += " AND 'Full Search' contains ignoring case '" + name_search + "'";
             $.address.parameter('name', encodeURIComponent(name_search));
         }
         //-----end of custom filters-----
@@ -314,7 +314,7 @@
 
     MapsLib.prototype.getList = function(whereClause) {
         var self = this;
-        var selectColumns = "Name, 'Full Address', Type, Tag, Phone, Fax";
+        var selectColumns = "Name,'Full Address',Type,Tag,'Phone 1','Phone 2',Fax,Website,Email,Description,'Type ID'";
 
         self.query({
             select: selectColumns,
@@ -341,16 +341,30 @@
         else {
             for (var row in data) {
                 var type_color = 'green';
-                if (data[row][2] == 'Local Government') type_color = 'blue';
-                if (data[row][2] == 'Community Services') type_color = 'red';
+                if (data[row][10] == '3') type_color = 'blue';
+                if (data[row][10] == '2') type_color = 'red';
                 template = "\
                   <tr>\
                       <td><span class='filter-box filter-" + type_color + "'></span></td>\
                       <td><strong>" + data[row][0] + "</strong></td>\
                       <td>" + data[row][1] + "</td>\
-                      <td>" + data[row][2] + ", " + data[row][3] + "</td>\
-                      <td>" + data[row][4] + "</td>\
-                      <td>" + data[row][5] + "</td>\
+                      <td>" + data[row][2] + "<br />" + data[row][3] + "</td>\
+                      <td>";
+
+                if (data[row][4] != "") 
+                    template += "<b>Phone:</b> " + data[row][4] + "<br>";
+                if (data[row][5] != "") 
+                    template += "<b>Phone secondary:</b> " + data[row][5] + "<br>";
+                if (data[row][6] != "") 
+                    template += "<b>Fax:</b> " + data[row][6] + "<br>";
+                if (data[row][7] != "") 
+                    template += "<b>Web:</b> <a href='" + data[row][7] + "' target='_blank'>" + data[row][7] + "</a><br>";
+                if (data[row][8] != "") 
+                    template += "<b>Email:</b> <a href='mailto:" + data[row][8] + "' target='_blank'>" + data[row][8] + "</a><br>";
+ 
+                template += "\
+                      </td>\
+                      <td>" + data[row][9] + "</td>\
                   </tr>";
                 results.append(template);
             }
