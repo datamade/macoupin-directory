@@ -5,6 +5,10 @@ a:hover { color: #4B58A6; }
   max-width: none;
 }
 
+#logo-img {
+  padding: 5px 15px;
+}
+
 .filter-box { 
   height: 15px; 
   width: 15px;  
