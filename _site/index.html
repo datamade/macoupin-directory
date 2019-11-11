@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>
+      
+      Macoupin Resource Directory
+    </title>
+
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content='Macoupin County’s online source for finding businesses, local governments and community services.' name='description'>
+    <meta content='Macoupin Resource Directory' name='author'>
+
+    <!-- Facebook metadata -->
+    <meta content="Macoupin Resource Directory" property="og:site_name">
+    
+      <meta content="Macoupin Resource Directory" property="og:title">
+    
+    
+      <meta content="website" property="og:type">
+    
+    
+      <meta content="Macoupin County’s online source for finding businesses, local governments and community services." property="og:description">
+    
+    
+      <meta content="http://localhost:5000/" property="og:url">
+    
+    
+    <meta content="http://localhost:5000/images/screenshot.jpg" property="og:image">
+    
+    
+
+    <!-- Twitter metadata -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@DataMadeCo">
+    <meta name="twitter:creator" content="@DataMadeCo">
+    
+      <meta name="twitter:title" content="Macoupin Resource Directory">
+    
+    
+      <meta name="twitter:url" content="http://localhost:5000/">
+    
+    
+      <meta name="twitter:description" content="Macoupin County’s online source for finding businesses, local governments and community services.">
+    
+    <meta name="twitter:image:src" content="http://localhost:5000/images/screenshot.jpg">
+
+
+    <link href='/img/favicon.png' rel='shortcut icon'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Poppins:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Quicksand:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.readable.min.css"/>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="/css/custom.css"/>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript" src="/lib/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyDo9vAT1yrHC-Crqjbr8W92BEvFXhh559w"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="/lib/leaflet-google.js" ></script>
+    <script type="text/javascript" src="/lib/jquery.address.js"></script>
+    <script type="text/javascript" src="/lib/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/lib/mustache.js" ></script>
+    <script type="text/javascript" src="/lib/js.cookie.js"></script>
+    <script type="text/javascript" src="/lib/clipboard.min.js"></script>
+    <script type="text/javascript" src="/lib/printThis.js"></script>
+    <script type="text/javascript" src="/lib/jquery.bs.gdpr.cookies.js"></script>
+    <script type="text/javascript" src="/js/analytics_lib.js"></script>
+    <script type="text/javascript" src="/js/cartodb_lib.js"></script>
+
+  </head>
+  <body>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Macoupin Resource Directory</a>
+        </div>
+
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav pull-right" id="dropdown-results">
+              <li>
+                <a href="/about/"><i class="fa fa-info-circle" aria-hidden="true"></i> About</a>
+              </li>
+              <li>
+                <a href="https://www.macoupinvotes.com/machform/view.php?id=11280"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add your information</a>
+              </li>
+              <li>
+                <a href="http://macoupincountyil.gov/county_clerk.htm"><i class="fa fa-plus-circle" aria-hidden="true"></i> County Clerk</a>
+              </li>
+              <li>
+                <a href="#" class="btn-print"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+              </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    <div class='container-fluid'>
+      <div class='row mg-bottom-lg'>
+  <div class="col-md-4">
+    <p>Macoupin County’s online source for finding businesses, local governments and community services.</p>
+
+    <div class='row'>
+      <div class="col-md-8">
+        <div class="form-group">
+            Address
+            <input class='form-control' id='search-address' placeholder='Enter an address or an intersection' type='text'>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class='form-group'>
+            Within
+            <select id='search-radius' class='form-control'>
+              <option value='400'>2 blocks</option>
+              <option value='805'>1/2 mile</option>
+              <option value='1610'>1 mile</option>
+              <option value='3220'>2 miles</option>
+              <option value='8050'>5 miles</option>
+            </select>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <button class='btn btn-search' id="btnSearch"><i class='fa fa-search'></i> Search</button>
+      <a href="/" class='btn btn-reset' id="btnReset" data-toggle="tooltip" data-placement="bottom" title="Reset"><i class="fa fa-repeat" aria-hidden="true"></i></a>
+      <button class='btn btn-change' id='btnViewMode' data-toggle='tooltip' data-placement="bottom" title='Change view'><i class='fa fa-list'></i></button>
+      <button type="button" class='btn btn-save' data-toggle="modal" data-target="#saveModal"><i class='fa fa-star'></i> Save search</button>
+    </div>
+
+  </div>
+
+  <div class='col-md-8'>
+    <div id='mapCanvas' style="display: block; height: 1000px;"></div>
+    <div id="listCanvas" style="display: none">
+      <h2 class='list-header hidden-xs'>Search results</h2>
+      <table class="table list-table table-striped">
+        <thead>
+          <tr>
+            <th class='hidden-xs'></th>
+            <th>Facility</th>
+            <th class='hidden-xs'>Hours</th>
+            <th class='hidden-xs'>Contact</th>
+          </tr>
+        </thead>
+        <tbody id='results-list'></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+  <div class="modal fade bd-example-modal-lg" id="modal-pop" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div id="printModal">
+
+          <div class="modal-header">
+            <button type="button" class="close close-btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span></button>
+            <h4 class="modal-title" id="modal-title"></h4>
+          </div>
+
+          <div class="modal-body">
+            <div class="container-fluid bd-example-row">
+              <div class="row">
+                <div class="col-md-8 get-sm">
+                  <div id="modal-main"></div>
+                </div>
+                <div class="col-md-4 hidden-xs hidden-s" id="modal-image"></div>
+              </div>
+
+              <div class="row modal-bottom modal-map-marker">
+                <div class="col-md-12">
+
+                  <div class="row">
+                    <div class="col-md-12 get-sm">
+                      <h4 id="age-header"></h4>
+                      <div id="age-subsection"></div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 get-sm">
+                      <h4 id="language-header"></h4>
+                      <div id="language-subsection"></div>
+                    </div>
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col-md-12 get-sm">
+                      <h4 id="programs-header"></h4>
+                      <div id="modal-programs"></div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 get-sm">
+                      <h4 id="type-header"></h4>
+                      <div id="type-subsection"></div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 get-sm" id="insurance-section">
+                      <h4 id="insurance-header"></h4>
+                      <div id="insurance-subsection"></div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 get-sm">
+                      <h4 id="religion-header"></h4>
+                      <div id="religion-subsection"></div>
+                    </div>
+                  </div>
+
+                  <br>
+
+                  <div class="row">
+                    <div class="col-md-12"><strong>See an error? Please send data corrections to <a href="mailto:reginafcompton@datamade.us">reginafcompton@datamade.us</a>.</strong></div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-body modal-body-bottom">
+          <div class="container-fluid bd-example-row">
+            <div class="row">
+              <div class="col-xs-9">
+                <div class="input-group">
+                  <button type="button" class="btn btn-save" id="copy-button" data-clipboard-target="#post-shortlink" data-tooltip="true" title="Copy to clipboard"><i class="fa fa-clipboard" aria-hidden="true"></i></button>
+                  <input id="post-shortlink" type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-xs-3">
+                <a href="#" class="btn-print-modal btn btn-reset pull-right"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="saveModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="saveModalLabel">Save search</h4>
+      </div>
+      <div class="modal-body">
+        <p>Like these results? Give this search a name (required), and save it for later use.</p>
+        <input type="text" class="form-control" id="saveInput" placeholder="Search name..." aria-describedby="basic-addon1">
+        <p class="warning" id="saveWarning"><small>* Please enter a search name.</small></p>
+
+        <br>
+
+        <button type="button" class="btn btn-reset" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> No, not now.</button>
+        <button class='btn btn-save' id="btnSave"><i class='fa fa-star'></i> Yes, save this search!</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style id="maps-styles">
+  #my-map{
+    marker-fill-opacity: 0.9;
+    marker-line-color: #FFF;
+    marker-line-width: 1;
+    marker-line-opacity: 1;
+    marker-placement: point;
+    marker-type: ellipse;
+    marker-width: 15;
+    marker-fill: #3E7BB6;
+    marker-allow-overlap: true;
+  }
+</style>
+
+<script type="text/javascript" src="/js/map.js"></script>
+
+
+
+
+
+
+    </div>
+
+  </body>
+</html>
+
+

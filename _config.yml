@@ -1,0 +1,8 @@
+port:  5000
+markdown: kramdown
+name: Macoupin Resource Directory
+title: Macoupin Resource Directory
+url: http://macoupindirectory.com
+description: "Macoupin County’s online source for finding businesses, local governments and community services."
+encoding: utf-8
+timezone: America/Chicago
