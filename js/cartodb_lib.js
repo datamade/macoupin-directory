@@ -182,6 +182,7 @@ var CartoDbLib = {
     sql.execute("SELECT " + CartoDbLib.fields + " FROM " + CartoDbLib.tableName + CartoDbLib.whereClause)
       .done(function(listData) {
         var obj_array = listData.rows;
+        console.log(listData)
 
         if (listData.rows.length == 0) {
           results.append("<p class='no-results'>No results. Please broaden your search.</p>");
@@ -189,7 +190,15 @@ var CartoDbLib = {
         else {
           for (idx in obj_array) {
             // todo: flesh this out
-            var output = Mustache.render("<tr><td><span class='facility-name'>{{obj_array[idx].['name']}}</span><br>");
+            console.log(obj_array[idx].name)
+            var output = Mustache.render("\
+              <tr>\
+                <td></td>\
+                <td>{{obj_array[idx].name}}</td>\
+                <td>Address</td>\
+                <td>Contact</td>\
+                <td>Description</td>\
+              </tr>");
             results.append(output);
             $('.fa-star-o').tooltip();
             $('.fa-star').tooltip();
