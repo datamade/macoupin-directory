@@ -4,34 +4,73 @@ layout: default
 
 <div class='row mg-bottom-lg'>
   <div class="col-md-4">
-    <p>Macoupin County’s online source for finding businesses, local governments and community services.</p>
+    <p>Macoupin County’s online source for finding businesses, local governments and community services. <a href='/about.html'>Read more &raquo;</a></p>
 
-    <div class='row'>
-      <div class="col-md-8">
-        <div class="form-group">
-            Address
-            <input class='form-control' id='search-address' placeholder='Enter an address or an intersection' type='text'>
+    <div class="well">
+      <div class='row'>
+        <div class="col-md-12">
+          <div class="form-group">
+              Search by name
+              <input class='form-control' id='search-name' placeholder='Enter a business or organization name' type='text'>
+          </div>
         </div>
       </div>
+      <div class='row'>
+        <div class="col-md-8">
+          <div class="form-group">
+              Near an address
+              <input class='form-control' id='search-address' placeholder='Enter an address' type='text'>
+          </div>
+        </div>
 
-      <div class="col-md-4">
-        <div class='form-group'>
-            Within
-            <select id='search-radius' class='form-control'>
-              <option value='400'>2 blocks</option>
-              <option value='805'>1/2 mile</option>
-              <option value='1610'>1 mile</option>
-              <option value='3220'>2 miles</option>
-              <option value='8050'>5 miles</option>
-            </select>
+        <div class="col-md-4">
+          <div class='form-group'>
+              Within
+              <select id='search-radius' class='form-control'>
+                <option value='400'>2 blocks</option>
+                <option value='805'>1/2 mile</option>
+                <option value='1610'>1 mile</option>
+                <option value='3220'>2 miles</option>
+                <option value='8050'>5 miles</option>
+              </select>
+          </div>
         </div>
       </div>
-    </div>
+      <div class='row'>
+        <div class="col-md-8">
+          <div class='form-group'>
+              Type of location
 
-    <div>
-      <button class='btn btn-search' id="btnSearch"><i class='fa fa-search'></i> Search</button>
-      <a href="/" class='btn btn-reset' id="btnReset" title="Reset"><i class="fa fa-repeat" aria-hidden="true"></i> Reset</a>
-      <button class='btn btn-change' id='btnViewMode' title='Change view'><i class='fa fa-list'></i> List</button>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="" id='cbType1'>
+                  <span class='filter-box filter-green'></span>
+                  Business
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="" id='cbType2'>
+                  <span class='filter-box filter-red'></span>
+                  Community Services
+                </label>
+              </div>
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" value="" id='cbType3'>
+                  <span class='filter-box filter-blue'></span>
+                  Local Government
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <div>
+        <button class='btn btn-search' id="btnSearch"><i class='fa fa-search'></i> Search</button>
+        <a href="/" class='btn btn-reset' id="btnReset" title="Reset"><i class="fa fa-repeat" aria-hidden="true"></i> Reset</a>
+        <button class='btn btn-change' id='btnViewMode' title='Change view'><i class='fa fa-list'></i> List view</button>
+      </div>
     </div>
 
   </div>

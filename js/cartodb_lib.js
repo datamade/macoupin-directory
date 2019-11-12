@@ -18,8 +18,10 @@ var CartoDbLib = {
   initialize: function(){
 
     //reset filters
+    $("#search-name").val(CartoDbLib.convertToPlainString($.address.parameter('name')));
     $("#search-address").val(CartoDbLib.convertToPlainString($.address.parameter('address')));
     $("#search-radius").val(CartoDbLib.convertToPlainString($.address.parameter('radius')));
+    $(":checkbox").prop("checked", "checked");
 
     var num = $.address.parameter('modal_id');
 
@@ -82,7 +84,7 @@ var CartoDbLib = {
       CartoDbLib.results_div.addTo(CartoDbLib.map);
 
       CartoDbLib.info.addTo(CartoDbLib.map);
-      CartoDbLib.clearSearch();
+      CartoDbLib.createSQL();
       CartoDbLib.renderMap();
       CartoDbLib.renderList();
       CartoDbLib.getResults();
@@ -99,8 +101,6 @@ var CartoDbLib = {
     }
 
     if (address != "") {
-      if (address.toLowerCase().indexOf(CartoDbLib.locationScope) == -1)
-        address = address + " " + CartoDbLib.locationScope;
 
       geocoder.geocode( { 'address': address }, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
@@ -188,6 +188,8 @@ var CartoDbLib = {
         }
         else {
           var template = '';
+
+          // ---- custom template ----
           for (idx in obj_array) {
 
             var type_color = 'green';
@@ -198,7 +200,7 @@ var CartoDbLib = {
             template = "\
               <tr>\
                   <td><span class='filter-box filter-" + type_color + "'></span></td>\
-                  <td><strong>" + obj_array[idx]['name'] + "</strong><br /><small>" + obj_array[idx]['type'] + "<br />" + obj_array[idx]['tag'] + "</small></td>\
+                  <td class='clickable' id='result-" + obj_array[idx]['id'] + "'><strong>" + obj_array[idx]['name'] + "</strong><br /><small>" + obj_array[idx]['type'] + "<br />" + obj_array[idx]['tag'] + "</small></td>\
                   <td>" + obj_array[idx]['full_address'] + "</td>\
                   <td>";
 
@@ -219,20 +221,15 @@ var CartoDbLib = {
               </tr>";
             results.append(template);
 
-            $('.fa-star-o').tooltip();
-            $('.fa-star').tooltip();
+            $("#result-" + obj_array[idx]['id']).on("click", function() {
+                console.log('clicked ' + obj_array[idx]['id'])
+                CartoDbLib.modalPop(obj_array[idx])
+            });
+            
+
+            // ---- end custom template ----
           }
         }
-    }).done(function(listData) {
-        $(".facility-name").on("click", function() {
-          var thisName = $(this).text();
-          var objArray = listData.rows;
-          $.each(objArray, function( index, obj ) {
-            if (obj.organization_name == thisName ) {
-              CartoDbLib.modalPop(obj)
-            }
-          });
-        });
     }).error(function(errors) {
       console.log("errors:" + errors);
     });
@@ -251,8 +248,7 @@ var CartoDbLib = {
   },
 
   modalPop: function(data) {
-      var contact = "<p id='modal-address'><i class='fa fa-map-marker' aria-hidden='true'></i> " + data.full_address + '</p>' + '<p class="modal-directions"><a href="http://maps.google.com/?q=' + data.full_address + '" target="_blank">GET DIRECTIONS</a></p>' +"<p id='modal-phone'><i class='fa fa-phone' aria-hidden='true'></i> " + data.intake_number + "</p>"
-      var hours = "<p><i class='fa fa-calendar' aria-hidden='true'></i> " + data.hours_of_operation + "</p>"
+      var contact = "<p id='modal-address'><i class='fa fa-map-marker' aria-hidden='true'></i> " + data.full_address + '</p>' + '<p class="modal-directions"><a href="http://maps.google.com/?q=' + data.full_address + '" target="_blank">GET DIRECTIONS</a></p>' +"<p id='modal-phone'><i class='fa fa-phone' aria-hidden='true'></i> " + data.phone_1 + "</p>"
       var url = ''
       var urlName = ''
       if (data.website != "") {
@@ -271,38 +267,13 @@ var CartoDbLib = {
 
       $('#modal-pop').modal();
       $('.modal-map-marker div.row').hide();
-      $('#modal-title, #modal-main, #modal-programs, #modal-image, #language-header, #insurance-header, #age-header, #programs-header, #type-header, #religion-header, #language-subsection, #insurance-subsection, #age-subsection, #type-subsection, #religion-subsection').empty();
-      $('#modal-title').append(icon + " " + data.organization_name);
+      $('#modal-title, #modal-main').empty();
+      $('#modal-title').append(data.name);
       $('#modal-main').append(contact);
-
-      var img_input = (data.image_url).toLowerCase();
-
-      if (img_input != "no photo" && img_input != "no image") {
-          $('#modal-image').append('<img class="img-borders" src=' + data.image_url + '>');
-          loaded_image = $('img.img-borders')
-          loaded_image.on('error', function() {
-            loaded_image.hide();
-          });
-      }
-
-      if (data.hours_of_operation != "") {
-        $('#modal-main').append(hours);
-      }
 
       $('#modal-main').append(website);
 
-      var age_list = ''
-      var type_list = ''
-      var insurance_list = ''
-      var language_list = 'English,&nbsp;&nbsp;'
-      var program_list = ''
-
       $.address.parameter('modal_id', data.id);
-      $("#post-shortlink").val(location.href);
-
-      // Add tooltip.
-      $('.fa-star-o').tooltip();
-      $('.fa-star').tooltip();
 
   },
 
@@ -350,19 +321,31 @@ var CartoDbLib = {
     var address = $("#search-address").val();
 
     if(CartoDbLib.currentPinpoint != null && address != '') {
-      CartoDbLib.geoSearch = "ST_DWithin(ST_SetSRID(ST_POINT(" + CartoDbLib.currentPinpoint[1] + ", " + CartoDbLib.currentPinpoint[0] + "), 4326)::geography, the_geom::geography, " + CartoDbLib.radius + ")";
+      CartoDbLib.geoSearch = " AND ST_DWithin(ST_SetSRID(ST_POINT(" + CartoDbLib.currentPinpoint[1] + ", " + CartoDbLib.currentPinpoint[0] + "), 4326)::geography, the_geom::geography, " + CartoDbLib.radius + ")";
     }
     else {
       CartoDbLib.geoSearch = ''
     }
 
-    CartoDbLib.whereClause = " WHERE the_geom is not null AND ";
+    CartoDbLib.whereClause = " WHERE the_geom is not null ";
+
+    //-----custom filters-----
+    var type_column = "type_id";
+    var searchType = type_column + " IN (-1,";
+    if ( $("#cbType1").is(':checked')) searchType += "1,";
+    if ( $("#cbType2").is(':checked')) searchType += "2,";
+    if ( $("#cbType3").is(':checked')) searchType += "3,";
+    CartoDbLib.whereClause += " AND " + searchType.slice(0, searchType.length - 1) + ")";
+    
+    var name_search = $("#search-name").val().replace("'", "\\'");
+    if (name_search != '') {
+      CartoDbLib.whereClause += " AND full_search ILIKE '%" + name_search + "%'";
+      $.address.parameter('name', encodeURIComponent(name_search));
+    }
+    // -----end of custom filters-----
 
     if (CartoDbLib.geoSearch != "") {
       CartoDbLib.whereClause += CartoDbLib.geoSearch;
-    }
-    else {
-      CartoDbLib.whereClause = " WHERE the_geom is not null ";
     }
   },
 

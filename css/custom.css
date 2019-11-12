@@ -10,8 +10,8 @@ h5 { margin-top: 0px ; margin-bottom: 2px; }
 th, td { padding: 8px; }
 
 p {
-  font-size: 18px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.2;
 }
 
 img {
@@ -363,3 +363,7 @@ ul.contents-terms li {
 .filter-blue { background-color: #5781FC; }
 .filter-purple { background-color: #7C54FB; }
 .filter-red { background-color: #FB6353; }
+
+.clickable {
+  cursor: pointer;
+}
