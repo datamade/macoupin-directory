@@ -179,7 +179,7 @@ var CartoDbLib = {
     }
 
     results.empty();
-    sql.execute("SELECT " + CartoDbLib.fields + " FROM " + CartoDbLib.tableName + CartoDbLib.whereClause)
+    sql.execute("SELECT " + CartoDbLib.fields + " FROM " + CartoDbLib.tableName + CartoDbLib.whereClause + " ORDER BY name")
       .done(function(listData) {
         var obj_array = listData.rows;
         console.log(listData)
@@ -188,18 +188,38 @@ var CartoDbLib = {
           results.append("<p class='no-results'>No results. Please broaden your search.</p>");
         }
         else {
+          var template = '';
           for (idx in obj_array) {
-            // todo: flesh this out
-            console.log(obj_array[idx].name)
-            var output = Mustache.render("\
+
+            var type_color = 'green';
+            
+            if (obj_array[idx]['type_id'] == '3') type_color = 'blue';
+            if (obj_array[idx]['type_id'] == '2') type_color = 'red';
+            
+            template = "\
               <tr>\
-                <td></td>\
-                <td>{{obj_array[idx].name}}</td>\
-                <td>Address</td>\
-                <td>Contact</td>\
-                <td>Description</td>\
-              </tr>");
-            results.append(output);
+                  <td><span class='filter-box filter-" + type_color + "'></span></td>\
+                  <td><strong>" + obj_array[idx]['name'] + "</strong><br /><small>" + obj_array[idx]['type'] + "<br />" + obj_array[idx]['tag'] + "</small></td>\
+                  <td>" + obj_array[idx]['full_address'] + "</td>\
+                  <td>";
+
+            if (obj_array[idx]['phone_1'] != "") 
+                template += "<b>Phone:</b> " + obj_array[idx]['phone_1'] + "<br>";
+            if (obj_array[idx]['phone_2'] != "") 
+                template += "<b>Phone secondary:</b> " + obj_array[idx]['phone_2'] + "<br>";
+            if (obj_array[idx]['fax'] != "") 
+                template += "<b>Fax:</b> " + obj_array[idx]['fax'] + "<br>";
+            if (obj_array[idx]['website'] != "") 
+                template += "<b>Web:</b> <a href='http://" + obj_array[idx]['website'] + "' target='_blank'>" + obj_array[idx]['website'] + "</a><br>";
+            if (obj_array[idx]['email'] != "") 
+                template += "<b>Email:</b> <a href='mailto:" + obj_array[idx]['email'] + "' target='_blank'>" + obj_array[idx]['email'] + "</a><br>";
+
+            template += "\
+                  </td>\
+                  <td>" + obj_array[idx]['description'] + "</td>\
+              </tr>";
+            results.append(template);
+
             $('.fa-star-o').tooltip();
             $('.fa-star').tooltip();
           }
