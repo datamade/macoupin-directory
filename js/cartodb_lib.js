@@ -200,33 +200,26 @@ var CartoDbLib = {
             template = "\
               <tr>\
                   <td><span class='filter-box filter-" + type_color + "'></span></td>\
-                  <td class='clickable' id='result-" + obj_array[idx]['id'] + "'><strong>" + obj_array[idx]['name'] + "</strong><br /><small>" + obj_array[idx]['type'] + "<br />" + obj_array[idx]['tag'] + "</small></td>\
+                  <td><strong>" + obj_array[idx]['name'] + "</strong><br /><small>" + obj_array[idx]['type'] + "<br />" + obj_array[idx]['tag'] + "</small></td>\
                   <td>" + obj_array[idx]['full_address'] + "</td>\
                   <td>";
 
             if (obj_array[idx]['phone_1'] != "") 
-                template += "<b>Phone:</b> " + obj_array[idx]['phone_1'] + "<br>";
+                template += "<strong>Phone:</strong> " + obj_array[idx]['phone_1'] + "<br>";
             if (obj_array[idx]['phone_2'] != "") 
-                template += "<b>Phone secondary:</b> " + obj_array[idx]['phone_2'] + "<br>";
+                template += "<strong>Phone secondary:</strong> " + obj_array[idx]['phone_2'] + "<br>";
             if (obj_array[idx]['fax'] != "") 
-                template += "<b>Fax:</b> " + obj_array[idx]['fax'] + "<br>";
+                template += "<strong>Fax:</strong> " + obj_array[idx]['fax'] + "<br>";
             if (obj_array[idx]['website'] != "") 
-                template += "<b>Web:</b> <a href='http://" + obj_array[idx]['website'] + "' target='_blank'>" + obj_array[idx]['website'] + "</a><br>";
+                template += "<strong>Web:</strong> <a href='http://" + obj_array[idx]['website'] + "' target='_blank'>" + obj_array[idx]['website'] + "</a><br>";
             if (obj_array[idx]['email'] != "") 
-                template += "<b>Email:</b> <a href='mailto:" + obj_array[idx]['email'] + "' target='_blank'>" + obj_array[idx]['email'] + "</a><br>";
+                template += "<strong>Email:</strong> <a href='mailto:" + obj_array[idx]['email'] + "' target='_blank'>" + obj_array[idx]['email'] + "</a><br>";
 
             template += "\
                   </td>\
                   <td>" + obj_array[idx]['description'] + "</td>\
               </tr>";
             results.append(template);
-
-            $("#result-" + obj_array[idx]['id']).on("click", function() {
-                console.log('clicked ' + obj_array[idx]['id'])
-                CartoDbLib.modalPop(obj_array[idx])
-            });
-            
-
             // ---- end custom template ----
           }
         }
@@ -248,31 +241,36 @@ var CartoDbLib = {
   },
 
   modalPop: function(data) {
-      var contact = "<p id='modal-address'><i class='fa fa-map-marker' aria-hidden='true'></i> " + data.full_address + '</p>' + '<p class="modal-directions"><a href="http://maps.google.com/?q=' + data.full_address + '" target="_blank">GET DIRECTIONS</a></p>' +"<p id='modal-phone'><i class='fa fa-phone' aria-hidden='true'></i> " + data.phone_1 + "</p>"
-      var url = ''
-      var urlName = ''
-      if (data.website != "") {
-        if (data.website.match(/^http/)) {
-          url =  data.website;
-          urlName = "<i class='fa fa-reply' aria-hidden='true'></i> Website"
 
-        }
-        else {
-          url = "http://" + data.website;
-          urlName = "<i class='fa fa-reply' aria-hidden='true'></i> Website"
-        }
-      }
+      var type_color = 'green';
+            
+      if (data['type_id'] == '3') type_color = 'blue';
+      if (data['type_id'] == '2') type_color = 'red';
+      
+      var template = "\
+        <h4><span class='filter-box filter-" + type_color + "'></span>\
+        <strong>" + data['name'] + "</strong><br /><small>" + data['type'] + "<br />" + data['tag'] + "</small></h4>\
+        <p><strong>Address:</strong> " + data['full_address'] + "</p>";
 
-      var website = "<p id='modal-site'><a href='" + url + "' target='_blank'>" + urlName + "</a></p>"
+      template += "<p>";
+      if (data['phone_1'] != "") 
+          template += "<strong>Phone:</strong> " + data['phone_1'] + "<br>";
+      if (data['phone_2'] != "") 
+          template += "<strong>Phone secondary:</strong> " + data['phone_2'] + "<br>";
+      if (data['fax'] != "") 
+          template += "<strong>Fax:</strong> " + data['fax'] + "<br>";
+      if (data['website'] != "") 
+          template += "<strong>Web:</strong> <a href='http://" + data['website'] + "' target='_blank'>" + data['website'] + "</a><br>";
+      if (data['email'] != "") 
+          template += "<strong>Email:</strong> <a href='mailto:" + data['email'] + "' target='_blank'>" + data['email'] + "</a><br>";
+      template += "</p>";
+
+      template += "\
+            <p><strong>Description</strong><br />" + data['description'] + "</p>";
 
       $('#modal-pop').modal();
-      $('.modal-map-marker div.row').hide();
       $('#modal-title, #modal-main').empty();
-      $('#modal-title').append(data.name);
-      $('#modal-main').append(contact);
-
-      $('#modal-main').append(website);
-
+      $('#modal-main').append(template);
       $.address.parameter('modal_id', data.id);
 
   },

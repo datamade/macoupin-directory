@@ -96,9 +96,27 @@ layout: default
 
 </div>
 
-{% include modal.html %}
+<div class="modal fade" id="modal-pop" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
 
-{% include save-search-modal.html %}
+      <div id="printModal">
+
+        <div class="modal-body">
+          <div class="container-fluid bd-example-row">
+            <div class="row">
+              <div class="col-md-12">
+                <button type="button" class="close close-btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span></button>
+                <div id="modal-main"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <style id="maps-styles">
   #my-map{

@@ -10,7 +10,7 @@ h5 { margin-top: 0px ; margin-bottom: 2px; }
 th, td { padding: 8px; }
 
 p {
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.2;
 }
 
@@ -225,61 +225,6 @@ button:focus, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn
   vertical-align: 1px;
 }
 
-/* Modals */
-.modal-header {
-  background-color: #72A5D6;
-  color: #FFF;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
-#modal-main > p {
-  margin-bottom: 2px;
-  word-wrap: break-word;
-}
-
-.modal-p {
-  margin-bottom: 0.8em;
-  word-wrap: break-word;
-  line-height: 1;
-}
-
-.modal-bottom {
-  border-top: 1px solid #CECECE;
-  margin-top: 2em;
-}
-
-.modal-body-bottom { border-top: 1px solid #F0F0F0; }
-
-.modal-directions { font-weight: 700; }
-
-#post-shortlink {
-  width: 50%;
-  border-radius: 5px;
-  margin-right: 0.5em;
-  margin-bottom: 1em;
-  color: #CECECE;
-}
-
-.modal-body-bottom .input-group {
-  width: 100%;
-}
-
-#copy-button {
-  margin: 0 .5em 0 0;
-  margin-bottom: 0.5em;
-  padding: .35em .7em;
-
-}
-
-.fa-times-circle {
-  margin-top: .15em;
-}
-
-.facility-name:hover, .locate-name:hover {
-  color: #7F7F7F;
-}
-
 iframe {
   width: 100%;
   height: 800px;
@@ -294,26 +239,6 @@ div#modal-image { padding: 0; }
         0px 0px 0px 2px #fff,
         0px 0px 0px 2px #fff,
         0px 0px 0px 6px rgba(0,0,0,0.2);
-}
-
-@media (max-width: 768px) {
-      .get-sm {
-              text-align: center;
-       }
-    }
-
-
-/* GDPR modal */
-#bs-gdpr-cookies-modal {
-  font-size: 16px;
-}
-
-#bs-gdpr-cookies-modal h5 {
-  font-size: 20px;
-}
-
-#bs-gdpr-cookies-modal .modal-footer {
-  border-top: 0;
 }
 
 /* About */
@@ -363,7 +288,3 @@ ul.contents-terms li {
 .filter-blue { background-color: #5781FC; }
 .filter-purple { background-color: #7C54FB; }
 .filter-red { background-color: #FB6353; }
-
-.clickable {
-  cursor: pointer;
-}
