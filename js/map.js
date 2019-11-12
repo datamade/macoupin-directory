@@ -1,31 +1,11 @@
 $(window).resize(function () {
   var h = $(window).height(),
-    offsetTop = 120; // Calculate the top offset
+    offsetTop = 110; // Calculate the top offset
 
   $('#mapCanvas').css('height', (h - offsetTop));
 }).resize();
 
 $(function() {
-  // https://github.com/Aleksander98/bsgdprcookies
-  // settings for jquery.bs.gdpr.cookies.js
-  var settings = {
-      title: 'About our cookies',
-      message: 'Macoupin Resource Directory uses cookies to allow you to save your searches for easy retrieval. DataMade does not collect or use this data in any way. By using this site you consent to our cookie policy.',
-      moreLinkLabel: '',
-      messageMaxHeightPercent: 30,
-      delay: 250,
-      acceptButtonLabel: 'Continue',
-      allowAdvancedOptions: false,
-      OnAccept : function() {
-          var preferences = $.fn.bsgdprcookies.GetUserPreferences();
-      }
-  }
-  // events for jquery.bs.gdpr.cookies.js
-  $('body').bsgdprcookies(settings);
-  $('#cookiesBtn').on('click', function(){
-      $('body').bsgdprcookies(settings, 'reinit');
-  });
-
   CartoDbLib.initialize();
   new Clipboard('#copy-button');
 
@@ -34,7 +14,6 @@ $(function() {
 
   $('#btnReset').tooltip();
   $('#btnViewMode').tooltip();
-  $('[data-tooltip="true"]').tooltip();
 
   $('#btnSearch').click(function(){
     // Temporary fix for map load issue: set show map as default.
@@ -42,7 +21,7 @@ $(function() {
       CartoDbLib.doSearch();
     }
     else {
-      $('#btnViewMode').html("<i class='fa fa-list'></i>");
+      $('#btnViewMode').html("<i class='fa fa-list'></i> List");
       $('#mapCanvas').show();
       $('#listCanvas').hide();
       CartoDbLib.doSearch();
@@ -51,12 +30,12 @@ $(function() {
 
   $('#btnViewMode').click(function(){
     if ($('#mapCanvas').is(":visible")){
-      $('#btnViewMode').html("<i class='fa fa-map-marker'></i>");
+      $('#btnViewMode').html("<i class='fa fa-map-marker'></i> Map");
       $('#listCanvas').show();
       $('#mapCanvas').hide();
     }
     else {
-      $('#btnViewMode').html("<i class='fa fa-list'></i>");
+      $('#btnViewMode').html("<i class='fa fa-list'></i> List");
       $('#listCanvas').hide();
       $('#mapCanvas').show();
     }
@@ -112,36 +91,3 @@ $(function() {
   });
 
 });
-
-function makeSelectData(array) {
-  data_arr = []
-  for(var i = 0; i < array.length; i++) {
-    data_arr.push({ id: i, text: CartoDbLib.formatText(array[i]) })
-  }
-
-  return data_arr
-};
-
-function makeSelectDataGroups(faciltyArray) {
-  data_arr_generic = []
-  data_arr_specific = []
-  for(var i = 0; i < faciltyArray.length; i++) {
-    if (faciltyArray[i].includes('facility_type_')) {
-      data_arr_specific.push({ id: i, text: CartoDbLib.formatText(faciltyArray[i]) })
-    }
-    else {
-      data_arr_generic.push({ id: i, text: CartoDbLib.formatText(faciltyArray[i]) })
-    }
-  }
-
-   return [
-      {text: "",
-      children: data_arr_generic},
-      {text: "Health facilities",
-      children: data_arr_specific},
-    ]
-};
-
-
-
-

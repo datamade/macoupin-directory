@@ -30,8 +30,8 @@ layout: default
 
     <div>
       <button class='btn btn-search' id="btnSearch"><i class='fa fa-search'></i> Search</button>
-      <a href="/" class='btn btn-reset' id="btnReset" data-toggle="tooltip" data-placement="bottom" title="Reset"><i class="fa fa-repeat" aria-hidden="true"></i></a>
-      <button class='btn btn-change' id='btnViewMode' data-toggle='tooltip' data-placement="bottom" title='Change view'><i class='fa fa-list'></i></button>
+      <a href="/" class='btn btn-reset' id="btnReset" title="Reset"><i class="fa fa-repeat" aria-hidden="true"></i> Reset</a>
+      <button class='btn btn-change' id='btnViewMode' title='Change view'><i class='fa fa-list'></i> List</button>
     </div>
 
   </div>
@@ -64,7 +64,7 @@ layout: default
 <style id="maps-styles">
   #my-map{
     marker-fill-opacity: 0.9;
-    marker-line-color: #FFF;
+    marker-line-color: #fff;
     marker-line-width: 1;
     marker-line-opacity: 1;
     marker-placement: point;
@@ -73,6 +73,10 @@ layout: default
     marker-fill: #3E7BB6;
     marker-allow-overlap: true;
   }
+
+  #my-map[type_id = 1] { marker-fill: #00E32C; }
+  #my-map[type_id = 2] { marker-fill: #FE624D; }
+  #my-map[type_id = 3] { marker-fill: #547DFF; }
 </style>
 
 <script type="text/javascript" src="/js/map.js"></script>
