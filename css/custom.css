@@ -7,13 +7,6 @@ h1,h2,h3 { line-height:inherit; font-family: 'Lato', sans-serif;}
 
 h5 { margin-top: 0px ; margin-bottom: 2px; }
 
-a { color: #FF3A41; }
-
-a:hover {
-  text-decoration: none;
-  color: #5187BB;
-}
-
 th, td { padding: 8px; }
 
 p {

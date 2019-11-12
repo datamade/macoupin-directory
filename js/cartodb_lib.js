@@ -182,7 +182,6 @@ var CartoDbLib = {
     sql.execute("SELECT " + CartoDbLib.fields + " FROM " + CartoDbLib.tableName + CartoDbLib.whereClause + " ORDER BY name")
       .done(function(listData) {
         var obj_array = listData.rows;
-        console.log(listData)
 
         if (listData.rows.length == 0) {
           results.append("<p class='no-results'>No results. Please broaden your search.</p>");
@@ -246,6 +245,7 @@ var CartoDbLib = {
       .done(function(data) {
         CartoDbLib.resultsCount = data.rows[0]["count"];
         CartoDbLib.results_div.update(CartoDbLib.resultsCount);
+        $('#list-result-count').html(CartoDbLib.resultsCount + ' locations found')
       }
     );
   },
