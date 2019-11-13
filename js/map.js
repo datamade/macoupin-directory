@@ -7,7 +7,6 @@ $(window).resize(function () {
 
 $(function() {
   CartoDbLib.initialize();
-  new Clipboard('#copy-button');
 
   var autocomplete = new google.maps.places.Autocomplete(document.getElementById('search-address'));
   var modalURL;
