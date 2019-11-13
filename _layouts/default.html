@@ -9,7 +9,7 @@
     </title>
 
     <meta charset='utf-8'>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta content='{{ site.description }}' name='description'>
     <meta content='{{ site.name }}' name='author'>
 
@@ -71,29 +71,58 @@
 
     <link href='/img/favicon.png' rel='shortcut icon'>
     <!-- Styles -->
-    <link rel="stylesheet" href="/css/bootstrap.readable.min.css"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-reboot.min.css">
+
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/custom.css"/>
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
 
-    <script type="text/javascript" src="/lib/jquery-1.10.1.min.js"></script>
-    <script type="text/javascript" src="/lib/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyAtLJ5XbO21UrxRTtjmn8uoahFmI-qGeA0"></script>
-    <script type="text/javascript" src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
-    <script type="text/javascript" src="/lib/leaflet-google.js" ></script>
-    <script type="text/javascript" src="/lib/jquery.address.js"></script>
-    <script type="text/javascript" src="/lib/printThis.js"></script>
-    <script type="text/javascript" src="/js/analytics_lib.js"></script>
-    <script type="text/javascript" src="/js/cartodb_lib.js"></script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/lib/jquery-3.3.1.min.js"></script>
+    <script src="/lib/popper.min.js"></script>
+    <script src="/lib/bootstrap.min.js"></script>
+
+    <script src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyAtLJ5XbO21UrxRTtjmn8uoahFmI-qGeA0"></script>
+    <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
+    <script src="/lib/leaflet-google.js" ></script>
+    <script src="/lib/jquery.address.js"></script>
+    <script src="/js/analytics_lib.js"></script>
+    <script src="/js/cartodb_lib.js"></script>
 
   </head>
   <body>
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+      <a class="navbar-brand" href="/"><img class='img-logo img-responsive' src='/images/logo.png' alt="Macoupin Resource Directory" title="Macoupin Resource Directory" style='height: 50px;'/></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav float-right">
+          <li class='nav-item'>
+            <a class="nav-link" href="/"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a>
+          </li>
+          <li class='nav-item'>
+            <a class="nav-link" href="/about/"><i class="fa fa-info-circle" aria-hidden="true"></i> About</a>
+          </li>
+          <li class='nav-item'>
+            <a class="nav-link" href="https://www.macoupinvotes.com/machform/view.php?id=11280"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add your information</a>
+          </li>
+          <li class='nav-item'>
+            <a class="nav-link" href="http://macoupincountyil.gov/county_clerk.htm"><i class="fa fa-plus-circle" aria-hidden="true"></i> County Clerk</a>
+          </li>
+          <li class='nav-item'>
+            <a class="nav-link" href="#" class="btn-print"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- <nav class="navbar navbar-expand-md navbar-light fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -123,9 +152,9 @@
                 <a href="#" class="btn-print"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
               </li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
-    </nav>
+    </nav> -->
     <div class='container-fluid'>
       {{content}}
     </div>
