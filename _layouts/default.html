@@ -95,14 +95,14 @@
   </head>
   <body>
 
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
-      <a class="navbar-brand" href="/"><img class='img-logo img-responsive' src='/images/logo.png' alt="Macoupin Resource Directory" title="Macoupin Resource Directory" style='height: 50px;'/></a>
+    <nav class="navbar navbar-expand-md navbar-light bg-light mb-2">
+      <a class="navbar-brand" href="/"><img src='/images/logo.png' alt="Macoupin Resource Directory" title="Macoupin Resource Directory" style='height: 50px;'/></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav float-right">
+      <div class="collapse navbar-collapse mr-auto" id="navbarsExampleDefault">
+        <ul class="navbar-nav ml-auto">
           <li class='nav-item'>
             <a class="nav-link" href="/"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a>
           </li>
@@ -113,51 +113,15 @@
             <a class="nav-link" href="https://www.macoupinvotes.com/machform/view.php?id=11280"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add your information</a>
           </li>
           <li class='nav-item'>
-            <a class="nav-link" href="http://macoupincountyil.gov/county_clerk.htm"><i class="fa fa-plus-circle" aria-hidden="true"></i> County Clerk</a>
-          </li>
-          <li class='nav-item'>
-            <a class="nav-link" href="#" class="btn-print"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+            <a class="nav-link" href="http://macoupincountyil.gov/county_clerk.htm">County Clerk</a>
           </li>
         </ul>
       </div>
     </nav>
 
-    <!-- <nav class="navbar navbar-expand-md navbar-light fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a href="/"><img class='img-logo img-responsive' src='/images/logo.png' alt="Macoupin Resource Directory" title="Macoupin Resource Directory" style='height: 50px;'/></a>
-        </div>
-
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav pull-right" id="dropdown-results">
-              <li>
-                <a href="/"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a>
-              </li>
-              <li>
-                <a href="/about/"><i class="fa fa-info-circle" aria-hidden="true"></i> About</a>
-              </li>
-              <li>
-                <a href="https://www.macoupinvotes.com/machform/view.php?id=11280"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add your information</a>
-              </li>
-              <li>
-                <a href="http://macoupincountyil.gov/county_clerk.htm"><i class="fa fa-plus-circle" aria-hidden="true"></i> County Clerk</a>
-              </li>
-              <li>
-                <a href="#" class="btn-print"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
-              </li>
-          </ul>
-        </div>
-      </div>
-    </nav> -->
-    <div class='container-fluid'>
+    <main role="main" class="container-fluid">
       {{content}}
-    </div>
+    </main>
 
   </body>
 </html>

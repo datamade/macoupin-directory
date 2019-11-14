@@ -211,9 +211,9 @@ var CartoDbLib = {
             if (obj_array[idx]['fax'] != "") 
                 template += "<strong>Fax:</strong> " + obj_array[idx]['fax'] + "<br>";
             if (obj_array[idx]['website'] != "") 
-                template += "<strong>Web:</strong> <a href='http://" + obj_array[idx]['website'] + "' target='_blank'>" + obj_array[idx]['website'] + "</a><br>";
+                template += "<a href='http://" + obj_array[idx]['website'] + "' target='_blank'>Website</a><br>";
             if (obj_array[idx]['email'] != "") 
-                template += "<strong>Email:</strong> <a href='mailto:" + obj_array[idx]['email'] + "' target='_blank'>" + obj_array[idx]['email'] + "</a><br>";
+                template += "<a href='mailto:" + obj_array[idx]['email'] + "' target='_blank'>Email</a><br>";
 
             template += "\
                   </td>\
@@ -372,7 +372,7 @@ var CartoDbLib = {
   addCircle: function() {
     CartoDbLib.radiusCircle = new L.circle(CartoDbLib.currentPinpoint, CartoDbLib.radius, {
         fillColor:'#1d5492',
-        fillOpacity:'0.2',
+        fillOpacity:'0.1',
         stroke: false,
         clickable: false
     });

@@ -2,117 +2,114 @@
 layout: default
 ---
 
-<div class='row mg-bottom-lg'>
+<div class='row'>
   <div class="col-md-4">
     <p>Macoupin County’s online source for finding businesses, local governments and community services. <a href='/about.html'>Read more &raquo;</a></p>
 
-    <div class="well">
-      <div class='row'>
-        <div class="col-md-12">
-          <div class="form-group">
-              Search by name
-              <input class='form-control' id='search-name' placeholder='Enter a business or organization name' type='text'>
-          </div>
-        </div>
-      </div>
-      <div class='row'>
-        <div class="col-md-8">
-          <div class="form-group">
-              Near an address
-              <input class='form-control' id='search-address' placeholder='Enter an address' type='text'>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class='form-group'>
-              Within
-              <select id='search-radius' class='form-control'>
-                <option value='400'>2 blocks</option>
-                <option value='805'>1/2 mile</option>
-                <option value='1610'>1 mile</option>
-                <option value='3220'>2 miles</option>
-                <option value='8050'>5 miles</option>
-              </select>
-          </div>
-        </div>
-      </div>
-      <div class='row'>
-        <div class="col-md-8">
-          <div class='form-group'>
-              Type of location
-
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" value="" id='cbType1'>
-                  <span class='filter-box filter-green'></span>
-                  Business
-                </label>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" value="" id='cbType2'>
-                  <span class='filter-box filter-red'></span>
-                  Community Services
-                </label>
-              </div>
-              <div class="checkbox">
-                <label>
-                  <input type="checkbox" value="" id='cbType3'>
-                  <span class='filter-box filter-blue'></span>
-                  Local Government
-                </label>
-              </div>
+    <div class="card bg-light">
+      <div class="card-body">
+        <div class='row'>
+          <div class="col-md-12">
+            <div class="form-group">
+                Search by name
+                <input class='form-control' id='search-name' placeholder='Enter a business or organization name' type='text'>
             </div>
           </div>
         </div>
+        <div class='row'>
+          <div class="col-md-8">
+            <div class="form-group">
+                Near an address
+                <input class='form-control' id='search-address' placeholder='Enter an address' type='text'>
+            </div>
+          </div>
 
-      <div>
-        <button class='btn btn-search' id="btnSearch"><i class='fa fa-search'></i> Search</button>
-        <a href="/" class='btn btn-reset' id="btnReset" title="Reset"><i class="fa fa-repeat" aria-hidden="true"></i> Reset</a>
-        <button class='btn btn-change' id='btnViewMode' title='Change view'><i class='fa fa-list'></i> List view</button>
+          <div class="col-md-4">
+            <div class='form-group'>
+                Within
+                <select id='search-radius' class='form-control'>
+                  <option value='400'>2 blocks</option>
+                  <option value='805'>1/2 mile</option>
+                  <option value='1610'>1 mile</option>
+                  <option value='3220'>2 miles</option>
+                  <option value='8050'>5 miles</option>
+                </select>
+            </div>
+          </div>
+        </div>
+        <div class='row'>
+          <div class="col-md-8">
+            <div class='form-group'>
+                Type of location
+
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" id='cbType1'>
+                    <span class='filter-box filter-green'></span>
+                    Business
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" id='cbType2'>
+                    <span class='filter-box filter-red'></span>
+                    Community Services
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox" value="" id='cbType3'>
+                    <span class='filter-box filter-blue'></span>
+                    Local Government
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button class='btn btn-primary' id="btnSearch"><i class='fa fa-search'></i> Search</button>
+          <a href="/" class='btn btn-secondary' id="btnReset" title="Reset"><i class="fa fa-repeat" aria-hidden="true"></i> Reset</a>
+          <button class='btn btn-dark' id='btnViewMode' title='Change view'><i class='fa fa-list'></i> List view</button>
+
+        </div>
       </div>
     </div>
 
-  </div>
-
-  <div class='col-md-8'>
-    <div id='mapCanvas' style="display: block; height: 1000px;"></div>
-    <div id="listCanvas" style="display: none">
-      <h2 class='list-header hidden-xs'>Search results <small id='list-result-count'></small></h2>
-      <table class="table list-table table-striped">
-        <thead>
-          <tr>
-            <th class='hidden-xs'></th>
-            <th>Name</th>
-            <th class='hidden-xs'>Address</th>
-            <th class='hidden-xs'>Contact</th>
-            <th class='hidden-xs'>Description</th>
-          </tr>
-        </thead>
-        <tbody id='results-list'></tbody>
-      </table>
+    <div class='col-md-8'>
+      <div id='mapCanvas' style="display: block; height: 1000px;"></div>
+      <div id="listCanvas" style="display: none">
+        <h2 class='list-header hidden-xs'>Search results <small id='list-result-count'></small></h2>
+        
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Contact</th>
+                <th scope="col">Description</th>
+              </tr>
+            </thead>
+            <tbody id='results-list'></tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
-
-</div>
 
 <div class="modal fade" id="modal-pop" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-
-      <div id="printModal">
-
-        <div class="modal-body">
-          <div class="container-fluid bd-example-row">
-            <div class="row">
-              <div class="col-md-12">
-                <button type="button" class="close close-btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span></button>
-                <div id="modal-main"></div>
-              </div>
+      <div class="modal-body">
+        <div class="container-fluid bd-example-row">
+          <div class="row">
+            <div class="col-md-12">
+              <button type="button" class="close close-btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span></button>
+              <div id="modal-main"></div>
             </div>
           </div>
         </div>
-
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
