@@ -131,8 +131,10 @@ ul.contents-terms li {
           background-clip: padding-box; 
 }
 
-.filter-yellow { background-color: #FBF358; }
-.filter-green { background-color: #00E13C; }
-.filter-blue { background-color: #5781FC; }
-.filter-purple { background-color: #7C54FB; }
-.filter-red { background-color: #FB6353; }
+.filter-yellow { background-color: #CBC706; }
+.filter-green { background-color: #10AC03; }
+.filter-blue { background-color: #217ECD; }
+.filter-purple { background-color: #9B15CD; }
+.filter-red { background-color: #CC2537; }
+.filter-orange { background-color: #CD8518; }
+.filter-grey { background-color: #7B7B7B; }

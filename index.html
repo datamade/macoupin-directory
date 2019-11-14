@@ -124,20 +124,15 @@ layout: default
 
 <style id="maps-styles">
   #my-map{
-    marker-fill-opacity: 0.9;
-    marker-line-color: #fff;
-    marker-line-width: 1;
-    marker-line-opacity: 1;
-    marker-placement: point;
-    marker-type: ellipse;
-    marker-width: 15;
-    marker-fill: #3E7BB6;
     marker-allow-overlap: true;
+    marker-width:20;
+
   }
 
-  #my-map[type_id = 1] { marker-fill: #00E32C; }
-  #my-map[type_id = 2] { marker-fill: #FE624D; }
-  #my-map[type_id = 3] { marker-fill: #547DFF; }
+  #my-map[type_id = 1] { marker-file: url(https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png); }
+  #my-map[type_id = 2] { marker-file: url(https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png); }
+  #my-map[type_id = 3] { marker-file: url(https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png); }
+  #my-map[type_id = 4] { marker-file: url(https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png); }
 </style>
 
 <script type="text/javascript" src="/js/map.js"></script>
