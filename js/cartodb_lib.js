@@ -1,21 +1,32 @@
 var CartoDbLib = CartoDbLib || {};
 var CartoDbLib = {
 
-  map_centroid:    [39.276807, -89.934306],
-  defaultZoom:     9,
-  lastClickedLayer: null,
-  locationScope:   "IL",
-  currentPinpoint: null,
-  layerUrl: 'https://datamade.carto.com/api/v2/viz/97d9e05a-1c8f-4f95-bd7e-879490999455/viz.json',
-  tableName: 'macoupinresourcedirectory_macoupinil_directory_csv',
-  userName: 'datamade',
+  // parameters to be defined on initialize() 
+  map_centroid: [],
+  defaultZoom: 9,
+  layerUrl: '',
+  tableName: '',
+  userName: '',
+  fields: '',
+
+  // internal properties
   geoSearch: '',
   whereClause: '',
   radius: '',
   resultsCount: 0,
-  fields : "id, cartodb_id, the_geom, name, full_address, full_search, description, phone_1, phone_2, fax, email, website, tag, type, type_id",
+  currentPinpoint: null,
+  lastClickedLayer: null,
 
-  initialize: function(){
+  initialize: function(options){
+
+    options = options || {};
+
+    CartoDbLib.map_centroid = options.map_centroid || [41.881832, -87.623177],
+    CartoDbLib.defaultZoom = options.defaultZoom || 9,
+    CartoDbLib.layerUrl = options.layerUrl || "",
+    CartoDbLib.tableName = options.tableName || "",
+    CartoDbLib.userName = options.userName || "",
+    CartoDbLib.fields = options.fields || "",
 
     //reset filters
     $("#search-name").val(CartoDbLib.convertToPlainString($.address.parameter('name')));
@@ -38,7 +49,8 @@ var CartoDbLib = {
     if (!CartoDbLib.map) {
       CartoDbLib.map = new L.Map('mapCanvas', {
         center: CartoDbLib.map_centroid,
-        zoom: CartoDbLib.defaultZoom
+        zoom: CartoDbLib.defaultZoom,
+        scrollWheelZoom: false
       });
 
       CartoDbLib.google = new L.Google('ROADMAP', {animate: false});
@@ -55,9 +67,13 @@ var CartoDbLib = {
       };
 
       // method that we will use to update the control based on feature properties passed
+      var hover_template;
+      $.get( "/templates/hover.ejs", function( template ) {
+        hover_template = template;
+      });
       CartoDbLib.info.update = function (props) {
         if (props) {
-          this._div.innerHTML = "<strong>" + props['name'] + "</strong><br />" + props['type'] + "<br />" + props.full_address;
+          this._div.innerHTML = ejs.render(hover_template, {obj: props});
         }
         else {
           this._div.innerHTML = 'Hover over a location';
@@ -82,12 +98,9 @@ var CartoDbLib = {
       };
 
       CartoDbLib.results_div.addTo(CartoDbLib.map);
-
       CartoDbLib.info.addTo(CartoDbLib.map);
-      CartoDbLib.createSQL();
-      CartoDbLib.renderMap();
-      CartoDbLib.renderList();
-      CartoDbLib.getResults();
+      
+      CartoDbLib.doSearch();
     }
   },
 
@@ -187,42 +200,16 @@ var CartoDbLib = {
           results.append("<p class='no-results'>No results. Please broaden your search.</p>");
         }
         else {
-          var template = '';
+          var row_content;
+          $.get( "/templates/table-row.ejs", function( template ) {
+              for (idx in obj_array) {
 
-          // ---- custom template ----
-          for (idx in obj_array) {
+                row_content = ejs.render(template, {obj: obj_array[idx]});
 
-            var type_color = 'green';
-            
-            if (obj_array[idx]['type_id'] == '3') type_color = 'blue';
-            if (obj_array[idx]['type_id'] == '2') type_color = 'red';
-            
-            template = "\
-              <tr>\
-                  <td><span class='filter-box filter-" + type_color + "'></span></td>\
-                  <td><strong>" + obj_array[idx]['name'] + "</strong><br /><small>" + obj_array[idx]['type'] + "<br />" + obj_array[idx]['tag'] + "</small></td>\
-                  <td>" + obj_array[idx]['full_address'] + "</td>\
-                  <td>";
-
-            if (obj_array[idx]['phone_1'] != "") 
-                template += "<strong>Phone:</strong> " + obj_array[idx]['phone_1'] + "<br>";
-            if (obj_array[idx]['phone_2'] != "") 
-                template += "<strong>Phone secondary:</strong> " + obj_array[idx]['phone_2'] + "<br>";
-            if (obj_array[idx]['fax'] != "") 
-                template += "<strong>Fax:</strong> " + obj_array[idx]['fax'] + "<br>";
-            if (obj_array[idx]['website'] != "") 
-                template += "<a href='http://" + obj_array[idx]['website'] + "' target='_blank'>Website</a><br>";
-            if (obj_array[idx]['email'] != "") 
-                template += "<a href='mailto:" + obj_array[idx]['email'] + "' target='_blank'>Email</a><br>";
-
-            template += "\
-                  </td>\
-                  <td>" + obj_array[idx]['description'] + "</td>\
-              </tr>";
-            results.append(template);
-            // ---- end custom template ----
+                results.append(row_content);
+              }
+            });
           }
-        }
     }).error(function(errors) {
       console.log("errors:" + errors);
     });
@@ -242,37 +229,13 @@ var CartoDbLib = {
 
   modalPop: function(data) {
 
-      var type_color = 'green';
-            
-      if (data['type_id'] == '3') type_color = 'blue';
-      if (data['type_id'] == '2') type_color = 'red';
-      
-      var template = "\
-        <h4><span class='filter-box filter-" + type_color + "'></span>\
-        <strong>" + data['name'] + "</strong><br /><small>" + data['type'] + "<br />" + data['tag'] + "</small></h4>\
-        <p><strong>Address:</strong> " + data['full_address'] + "</p>";
-
-      template += "<p>";
-      if (data['phone_1'] != "") 
-          template += "<strong>Phone:</strong> " + data['phone_1'] + "<br>";
-      if (data['phone_2'] != "") 
-          template += "<strong>Phone secondary:</strong> " + data['phone_2'] + "<br>";
-      if (data['fax'] != "") 
-          template += "<strong>Fax:</strong> " + data['fax'] + "<br>";
-      if (data['website'] != "") 
-          template += "<strong>Web:</strong> <a href='http://" + data['website'] + "' target='_blank'>" + data['website'] + "</a><br>";
-      if (data['email'] != "") 
-          template += "<strong>Email:</strong> <a href='mailto:" + data['email'] + "' target='_blank'>" + data['email'] + "</a><br>";
-      template += "</p>";
-
-      template += "\
-            <p><strong>Description</strong><br />" + data['description'] + "</p>";
-
-      $('#modal-pop').modal();
-      $('#modal-title, #modal-main').empty();
-      $('#modal-main').append(template);
-      $.address.parameter('modal_id', data.id);
-
+    var modal_content;
+    $.get( "/templates/popup.ejs", function( template ) {
+        modal_content = ejs.render(template, {obj: data});
+        $('#modal-pop').modal();
+        $('#modal-main').html(modal_content);
+        $.address.parameter('modal_id', data.id);
+      });
   },
 
   clearSearch: function(){
@@ -305,7 +268,6 @@ var CartoDbLib = {
       if (status == google.maps.GeocoderStatus.OK) {
         if (results[1]) {
           $('#search-address').val(results[1].formatted_address);
-          $('.hint').focus();
           CartoDbLib.doSearch();
         }
       } else {
@@ -328,6 +290,12 @@ var CartoDbLib = {
     CartoDbLib.whereClause = " WHERE the_geom is not null ";
 
     //-----custom filters-----
+    var name_search = $("#search-name").val().replace("'", "\\'");
+    if (name_search != '') {
+      CartoDbLib.whereClause += " AND full_search ILIKE '%" + name_search + "%'";
+      $.address.parameter('name', encodeURIComponent(name_search));
+    }
+
     var type_column = "type_id";
     var searchType = type_column + " IN (-1,";
     if ( $("#cbType1").is(':checked')) searchType += "1,";
@@ -335,12 +303,6 @@ var CartoDbLib = {
     if ( $("#cbType3").is(':checked')) searchType += "3,";
     if ( $("#cbType4").is(':checked')) searchType += "4,";
     CartoDbLib.whereClause += " AND " + searchType.slice(0, searchType.length - 1) + ")";
-    
-    var name_search = $("#search-name").val().replace("'", "\\'");
-    if (name_search != '') {
-      CartoDbLib.whereClause += " AND full_search ILIKE '%" + name_search + "%'";
-      $.address.parameter('name', encodeURIComponent(name_search));
-    }
     // -----end of custom filters-----
 
     if (CartoDbLib.geoSearch != "") {
@@ -386,5 +348,14 @@ var CartoDbLib = {
     if (text == undefined) return '';
     return decodeURIComponent(text);
   },
+
+  // -----custom functions-----
+  getColor: function(type_id){
+    if (type_id == '2') return 'red';
+    if (type_id == '3') return 'blue';
+    if (type_id == '4') return 'yellow';
+    else return 'green';
+  },
+  // -----end custom functions-----
 
 }

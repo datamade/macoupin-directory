@@ -6,7 +6,15 @@ $(window).resize(function () {
 }).resize();
 
 $(function() {
-  CartoDbLib.initialize();
+
+  CartoDbLib.initialize({
+    map_centroid: [39.276807, -89.934306],
+    defaultZoom:  9,
+    layerUrl:     'https://datamade.carto.com/api/v2/viz/97d9e05a-1c8f-4f95-bd7e-879490999455/viz.json',
+    tableName:    'macoupinresourcedirectory_macoupinil_directory_csv',
+    userName:     'datamade',
+    fields :      'id, cartodb_id, the_geom, name, full_address, full_search, description, phone_1, phone_2, fax, email, website, tag, type, type_id',
+  });
 
   var autocomplete = new google.maps.places.Autocomplete(document.getElementById('search-address'));
   var modalURL;
@@ -55,14 +63,6 @@ $(function() {
 
   $(".close-btn").on('click', function() {
     $.address.parameter('modal_id', null)
-  });
-
-  $(".btn-print").on("click", function() {
-    window.print();
-  });
-
-  $(".btn-print-modal").on("click", function() {
-      $("#printModal").printThis();
   });
 
 });
