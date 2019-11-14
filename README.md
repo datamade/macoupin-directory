@@ -17,9 +17,10 @@ Macoupin County’s online source for finding businesses, local governments and 
 * [Jekyll](http://jekyllrb.com)
 * [CartoDB](http://docs.cartodb.com/cartodb-platform/cartodb-js.html)
 * [Leaflet](http://leafletjs.com)
-* [jQuery](http://jquery.org)
+* [jQuery 3.3.1](http://jquery.org)
 * [jQuery Address](http://www.asual.com/jquery/address)
-* [Bootstrap](http://getbootstrap.com)
+* [Bootstrap 4](http://getbootstrap.com)
+* [leaflet-color-markers](https://github.com/pointhi/leaflet-color-markers)
 
 ## Data
 
