@@ -1,142 +1,220 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>Macoupin Resource Directory</title>
 
-<div class='row'>
-  <div class="col-md-4">
-    <p>Macoupin County’s online source for finding businesses, local governments and community services. <a href='/about.html'>Read more &raquo;</a></p>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content='Macoupin County’s online source for finding businesses, local governments and community services.' name='description'>
+    <meta content='Macoupin Resource Directory' name='author'>
 
-    <div class="card bg-light">
-      <div class="card-body">
-        <div class='row'>
-          <div class="col-md-12">
-            <div class="form-group">
-                Search by name
-                <input class='form-control' id='search-name' placeholder='Enter a business or organization name' type='text'>
-            </div>
-          </div>
-        </div>
-        <div class='row'>
-          <div class="col-md-8">
-            <div class="form-group">
-                Near an address
-                <input class='form-control' id='search-address' placeholder='Enter an address' type='text'>
-            </div>
-          </div>
+    <!-- Facebook metadata -->
+    <meta content="Macoupin Resource Directory" property="og:site_name">
+    <meta content="Macoupin Resource Directory" property="og:title">
+    <meta content="website" property="og:type">
+    <meta content="Macoupin County’s online source for finding businesses, local governments and community services." property="og:description">
+    <meta content="https://macoupindirectory.com/" property="og:url">
+    <meta content="https://macoupindirectory.com/images/screenshot.jpg" property="og:image">
+    
+    <!-- Twitter metadata -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@DataMadeCo">
+    <meta name="twitter:creator" content="@DataMadeCo">
+    <meta name="twitter:title" content="Macoupin Resource Directory">
+    <meta name="twitter:url" content="https://macoupindirectory.com/">
+    <meta name="twitter:description" content="Macoupin County’s online source for finding businesses, local governments and community services.">
+    <meta name="twitter:image:src" content="https://macoupindirectory.com/images/screenshot.jpg">
 
-          <div class="col-md-4">
-            <div class='form-group'>
-                Within
-                <select id='search-radius' class='form-control'>
-                  <option value='400'>2 blocks</option>
-                  <option value='805'>1/2 mile</option>
-                  <option value='1610'>1 mile</option>
-                  <option value='3220'>2 miles</option>
-                  <option value='8050'>5 miles</option>
-                </select>
-            </div>
-          </div>
-        </div>
-        <div class='row'>
-          <div class="col-md-8">
-            <div class='form-group'>
-                Type of location
 
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" value="" id='cbType1'>
-                    <span class='filter-box filter-green'></span>
-                    Business
-                  </label>
+    <link href='/img/favicon.png' rel='shortcut icon'>
+    <!-- Styles -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-reboot.min.css">
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/custom.css"/>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/lib/jquery-3.3.1.min.js"></script>
+    <script src="/lib/popper.min.js"></script>
+    <script src="/lib/bootstrap.min.js"></script>
+    <script src="/lib/ejs.min.js"></script>
+    <script src="/lib/jquery.address.js"></script>
+
+    <!-- CARTO JavaScript -->
+    <script src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyAtLJ5XbO21UrxRTtjmn8uoahFmI-qGeA0"></script>
+    <script src="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/cartodb.js"></script>
+    <script src="/lib/leaflet-google.js" ></script>
+    
+    <!-- Custom JavaScript -->
+    <script src="/js/analytics_lib.js"></script>
+    <script src="/js/cartodb_lib.js"></script>
+
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-light bg-light mb-2">
+      <a class="navbar-brand" href="/"><img src='/images/logo.png' alt="Macoupin Resource Directory" title="Macoupin Resource Directory" style='height: 50px;'/></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse mr-auto" id="navbarsExampleDefault">
+        <ul class="navbar-nav ml-auto">
+          <li class='nav-item'>
+            <a class="nav-link active" href="/"><i class="fa fa-map-marker" aria-hidden="true"></i> Map</a>
+          </li>
+          <li class='nav-item'>
+            <a class="nav-link" href="/about.html"><i class="fa fa-info-circle" aria-hidden="true"></i> About</a>
+          </li>
+          <li class='nav-item'>
+            <a class="nav-link" href="https://www.macoupinvotes.com/machform/view.php?id=11280"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add your information</a>
+          </li>
+          <li class='nav-item'>
+            <a class="nav-link" href="http://macoupincountyil.gov/county_clerk.htm">County Clerk</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="container-fluid">
+
+      <div class='row'>
+        <div class="col-md-4">
+          <p>Macoupin County’s online source for finding businesses, local governments and community services. <a href='/about.html'>Read more &raquo;</a></p>
+
+          <div class="card bg-light">
+            <div class="card-body">
+              <div class='row'>
+                <div class="col-md-12">
+                  <div class="form-group">
+                      Search by name
+                      <input class='form-control' id='search-name' placeholder='Enter a business or organization name' type='text'>
+                  </div>
                 </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" value="" id='cbType2'>
-                    <span class='filter-box filter-red'></span>
-                    Community Services
-                  </label>
+              </div>
+              <div class='row'>
+                <div class="col-md-8">
+                  <div class="form-group">
+                      Near an address
+                      <input class='form-control' id='search-address' placeholder='Enter an address' type='text'>
+                  </div>
                 </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" value="" id='cbType3'>
-                    <span class='filter-box filter-blue'></span>
-                    Local Government
-                  </label>
+
+                <div class="col-md-4">
+                  <div class='form-group'>
+                      Within
+                      <select id='search-radius' class='form-control'>
+                        <option value='400'>2 blocks</option>
+                        <option value='805'>1/2 mile</option>
+                        <option value='1610'>1 mile</option>
+                        <option value='3220'>2 miles</option>
+                        <option value='8050'>5 miles</option>
+                      </select>
+                  </div>
                 </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox" value="" id='cbType4'>
-                    <span class='filter-box filter-yellow'></span>
-                    Tourist Spot
-                  </label>
+              </div>
+              <div class='row'>
+                <div class="col-md-8">
+                  <div class='form-group'>
+                      Type of location
+
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" value="" id='cbType1'>
+                          <span class='filter-box filter-green'></span>
+                          Business
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" value="" id='cbType2'>
+                          <span class='filter-box filter-red'></span>
+                          Community Services
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" value="" id='cbType3'>
+                          <span class='filter-box filter-blue'></span>
+                          Local Government
+                        </label>
+                      </div>
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" value="" id='cbType4'>
+                          <span class='filter-box filter-yellow'></span>
+                          Tourist Spot
+                        </label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+
+                <button class='btn btn-primary' id="btnSearch"><i class='fa fa-search'></i> Search</button>
+                <a href="/" class='btn btn-secondary' id="btnReset" title="Reset"><i class="fa fa-repeat" aria-hidden="true"></i> Reset</a>
+                <button class='btn btn-dark' id='btnViewMode' title='Change view'><i class='fa fa-list'></i> List view</button>
+
               </div>
             </div>
           </div>
 
-          <button class='btn btn-primary' id="btnSearch"><i class='fa fa-search'></i> Search</button>
-          <a href="/" class='btn btn-secondary' id="btnReset" title="Reset"><i class="fa fa-repeat" aria-hidden="true"></i> Reset</a>
-          <button class='btn btn-dark' id='btnViewMode' title='Change view'><i class='fa fa-list'></i> List view</button>
-
-        </div>
-      </div>
-    </div>
-
-    <div class='col-md-8'>
-      <div id='mapCanvas' style="display: block; height: 1000px;"></div>
-      <div id="listCanvas" style="display: none">
-        <h2 class='list-header hidden-xs'>Search results <small id='list-result-count'></small></h2>
-        
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col"></th>
-                <th scope="col">Name</th>
-                <th scope="col">Address</th>
-                <th scope="col">Contact</th>
-                <th scope="col">Description</th>
-              </tr>
-            </thead>
-            <tbody id='results-list'></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-
-<div class="modal fade" id="modal-pop" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="container-fluid bd-example-row">
-          <div class="row">
-            <div class="col-md-12">
-              <button type="button" class="close close-btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span></button>
-              <div id="modal-main"></div>
+          <div class='col-md-8'>
+            <div id='mapCanvas' style="display: block; height: 1000px;"></div>
+            <div id="listCanvas" style="display: none">
+              <h2 class='list-header hidden-xs'>Search results <small id='list-result-count'></small></h2>
+              
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Address</th>
+                      <th scope="col">Contact</th>
+                      <th scope="col">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody id='results-list'></tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
 
-<style id="maps-styles">
-  #my-map{
-    marker-allow-overlap: true;
-    marker-width:20;
-  }
+        <div class="modal fade" id="modal-pop" tabindex="-1" role="dialog">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div class="container-fluid bd-example-row">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <button type="button" class="close close-btn" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times-circle" aria-hidden="true"></i></span></button>
+                      <div id="modal-main"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
-  #my-map[type_id = 1] { marker-file: url(https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png); }
-  #my-map[type_id = 2] { marker-file: url(https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png); }
-  #my-map[type_id = 3] { marker-file: url(https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png); }
-  #my-map[type_id = 4] { marker-file: url(https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png); }
-</style>
+        <style id="maps-styles">
+          #my-map{
+            marker-allow-overlap: true;
+            marker-width:20;
+          }
 
-<script type="text/javascript" src="/js/map.js"></script>
+          #my-map[type_id = 1] { marker-file: url(https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png); }
+          #my-map[type_id = 2] { marker-file: url(https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png); }
+          #my-map[type_id = 3] { marker-file: url(https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png); }
+          #my-map[type_id = 4] { marker-file: url(https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-yellow.png); }
+        </style>
 
+        <script type="text/javascript" src="/js/map.js"></script>
 
-
-
-
+    </main>
+  </body>
+</html>
