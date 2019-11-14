@@ -333,6 +333,7 @@ var CartoDbLib = {
     if ( $("#cbType1").is(':checked')) searchType += "1,";
     if ( $("#cbType2").is(':checked')) searchType += "2,";
     if ( $("#cbType3").is(':checked')) searchType += "3,";
+    if ( $("#cbType4").is(':checked')) searchType += "4,";
     CartoDbLib.whereClause += " AND " + searchType.slice(0, searchType.length - 1) + ")";
     
     var name_search = $("#search-name").val().replace("'", "\\'");
