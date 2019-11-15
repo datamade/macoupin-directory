@@ -24,17 +24,6 @@ Macoupin County’s online source for finding businesses, local governments and 
 
 The data for this tool resides in a Google spreadsheet and its corresponding Carto table.
 
-## Run Tests
-
-This site includes a basic test suite built with Rspec and Capybara, which drive the browser to perform acceptance tests.
-
-<pre>
-  $ bundle install
-  $ rspec spec/
-</pre>
-
-Some tests include **binding.pry**. In such cases the test pauses, after which you may type "exit" in the terminal to continue.
-
 ## Team
 
 * [Derek Eder](mailto:derek.eder@datamade.com)
