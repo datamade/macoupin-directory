@@ -1,37 +1,56 @@
-a { color: #4B58A6; }
-a:hover { color: #4B58A6; }
-
-#map_canvas img {
+/* Map map */
+#mapCanvas img {
   max-width: none;
 }
 
-#logo-img {
-  padding: 5px 15px;
+.leaflet-google-layer{
+    z-index: 0 !important;
+}
+
+.leaflet-map-pane{
+    z-index: 100;
+}
+
+.info {
+  font-family: 'Lato', sans-serif;
+  padding: 6px 8px;
+  background: #ffffff;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+}
+
+.info h4 {
+  margin: 0 0 5px;
+  color: #777;
+}
+
+.results-count {
+  font-family: 'Lato', sans-serif;
+  padding: 6px 8px;
+  background: #ffffff;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
 }
 
 .filter-box { 
+  margin-top: 5px;
   height: 15px; 
   width: 15px;  
   display: inline-block;
-  *border-right-width: 2px;
-  *border-bottom-width: 2px;
-  -webkit-border-radius: 5px;
-     -moz-border-radius: 5px;
-          border-radius: 5px;
+  *border-right-width: 4px;
+  *border-bottom-width: 4px;
+  -webkit-border-radius: 10px;
+     -moz-border-radius: 10px;
+          border-radius: 10px;
   -webkit-background-clip: padding-box;
      -moz-background-clip: padding;
           background-clip: padding-box; 
 }
 
-.filter-yellow { background-color: #FBF358; }
-.filter-green { background-color: #00E13C; }
-.filter-blue { background-color: #5781FC; }
-.filter-purple { background-color: #7C54FB; }
-.filter-red { background-color: #FB6353; }
-
-canvas {-ms-touch-action: double-tap-zoom;}
-
-/* customizations for iframe template */
-.iframe #map_canvas { height: 500px; }
-.iframe .well { margin-bottom: 5px; }
-.iframe .alert { margin-top: 5px; }
+.filter-yellow { background-color: #CBC706; }
+.filter-green { background-color: #10AC03; }
+.filter-blue { background-color: #217ECD; }
+.filter-purple { background-color: #9B15CD; }
+.filter-red { background-color: #CC2537; }
+.filter-orange { background-color: #CD8518; }
+.filter-grey { background-color: #7B7B7B; }

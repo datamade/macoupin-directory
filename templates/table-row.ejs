@@ -1,0 +1,33 @@
+<tr>                  
+    <td>
+        <span class="filter-box filter-<%= CartoDbLib.getColor(obj.type_id) %>"></span>
+    </td>
+    <td>
+        <strong><%= obj.name %></strong><br>
+        <small><%= obj.type %><br>
+        Real <%= obj.tag %></small>
+    </td>                  
+    <td><%= obj.full_address %></td>                  
+    <td>
+        <% if (obj.phone_1) { %>
+            <strong>Phone:</strong> <%= obj.phone_1 %><br>
+        <% } %>
+        
+        <% if (obj.phone_2) { %>
+            <strong>Phone 2:</strong> <%= obj.phone_2 %><br>
+        <% } %>
+
+        <% if (obj.fax) { %>
+            <strong>Fax:</strong> <%= obj.fax %><br>
+        <% } %>
+        
+        <% if (obj.website) { %>
+            <a href="http://<%= obj.website %>" target="_blank">Website</a><br>
+        <% } %>
+        
+        <% if (obj.email) { %>
+            <a href="mailto:<%= obj.email %>" target="_blank">Email</a><br>
+        <% } %>
+    </td>
+    <td><%= obj.description %></td>
+</tr>
