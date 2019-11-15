@@ -7,14 +7,12 @@ Macoupin County’s online source for finding businesses, local governments and 
 <pre>
   $ git clone https://github.com/datamade/macoupin-directory.git
   $ cd macoupin-directory
-  $ gem install jekyll
-  $ jekyll serve -w
-  navigate to http://localhost:5000/
+  $ python -m SimpleHTTPServer
+  navigate to http://localhost:8000/
 </pre>
 
 ## Dependencies
 
-* [Jekyll](http://jekyllrb.com)
 * [CartoDB](http://docs.cartodb.com/cartodb-platform/cartodb-js.html)
 * [Leaflet](http://leafletjs.com)
 * [jQuery 3.3.1](http://jquery.org)
