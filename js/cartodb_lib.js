@@ -248,34 +248,6 @@ var CartoDbLib = {
       CartoDbLib.map.removeLayer( CartoDbLib.radiusCircle );
   },
 
-  findMe: function() {
-    // Try W3C Geolocation (Preferred)
-    var foundLocation;
-
-    if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        foundLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-        CartoDbLib.addrFromLatLng(foundLocation);
-      }, null);
-    }
-    else {
-      alert("Sorry, we could not find your location.");
-    }
-  },
-
-  addrFromLatLng: function(latLngPoint) {
-    geocoder.geocode({'latLng': latLngPoint}, function(results, status) {
-      if (status == google.maps.GeocoderStatus.OK) {
-        if (results[1]) {
-          $('#search-address').val(results[1].formatted_address);
-          CartoDbLib.doSearch();
-        }
-      } else {
-        alert("Geocoder failed due to: " + status);
-      }
-    });
-  },
-
   createSQL: function() {
      // Devise SQL calls for geosearch and language search.
     var address = $("#search-address").val();
