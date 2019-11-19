@@ -8,6 +8,10 @@ var CartoDbLib = {
   tableName: '',
   userName: '',
   fields: '',
+  listOrderBy: '',
+  googleApiKey: '',
+  recordName: '',
+  recordNamePlural: '',
 
   // internal properties
   geoSearch: '',
@@ -27,11 +31,21 @@ var CartoDbLib = {
     CartoDbLib.tableName = options.tableName || "",
     CartoDbLib.userName = options.userName || "",
     CartoDbLib.fields = options.fields || "",
+    CartoDbLib.listOrderBy = options.listOrderBy || "",
+    CartoDbLib.googleApiKey = options.googleApiKey || "",
+    CartoDbLib.recordName = options.recordName || "result",
+    CartoDbLib.recordNamePlural = options.recordNamePlural || "results",
+    CartoDbLib.radius = options.radius || 805,    
 
     //reset filters
     $("#search-name").val(CartoDbLib.convertToPlainString($.address.parameter('name')));
     $("#search-address").val(CartoDbLib.convertToPlainString($.address.parameter('address')));
-    $("#search-radius").val(CartoDbLib.convertToPlainString($.address.parameter('radius')));
+    var loadRadius = CartoDbLib.convertToPlainString($.address.parameter('radius'));
+    if (loadRadius != "") 
+        $("#search-radius").val(loadRadius);
+    else 
+        $("#search-radius").val(CartoDbLib.radius);
+
     $(":checkbox").prop("checked", "checked");
 
     var num = $.address.parameter('modal_id');
@@ -76,12 +90,12 @@ var CartoDbLib = {
           this._div.innerHTML = ejs.render(hover_template, {obj: props});
         }
         else {
-          this._div.innerHTML = 'Hover over a location';
+          this._div.innerHTML = 'Hover over a ' + CartoDbLib.recordName;
         }
       };
 
       CartoDbLib.info.clear = function(){
-        this._div.innerHTML = 'Hover over a location';
+        this._div.innerHTML = 'Hover over a ' + CartoDbLib.recordName;
       };
 
       //add results control
@@ -94,7 +108,12 @@ var CartoDbLib = {
       };
 
       CartoDbLib.results_div.update = function (count){
-        this._div.innerHTML = count + ' locations found';
+        var recname = CartoDbLib.recordNamePlural;
+        if (count == 1) {
+            recname = CartoDbLib.recordName;
+        }
+
+        this._div.innerHTML = count.toLocaleString('en') + ' ' + recname + ' found';
       };
 
       CartoDbLib.results_div.addTo(CartoDbLib.map);
@@ -191,8 +210,12 @@ var CartoDbLib = {
       CartoDbLib.whereClause = '';
     }
 
+    var sortClause = '';
+    if (CartoDbLib.listOrderBy != '')
+      sortClause = 'ORDER BY ' + CartoDbLib.listOrderBy;
+
     results.empty();
-    sql.execute("SELECT " + CartoDbLib.fields + " FROM " + CartoDbLib.tableName + CartoDbLib.whereClause + " ORDER BY name")
+    sql.execute("SELECT " + CartoDbLib.fields + " FROM " + CartoDbLib.tableName + CartoDbLib.whereClause + sortClause)
       .done(function(listData) {
         var obj_array = listData.rows;
 
@@ -222,7 +245,13 @@ var CartoDbLib = {
       .done(function(data) {
         CartoDbLib.resultsCount = data.rows[0]["count"];
         CartoDbLib.results_div.update(CartoDbLib.resultsCount);
-        $('#list-result-count').html(CartoDbLib.resultsCount + ' locations found')
+
+        var recname = CartoDbLib.recordNamePlural;
+        if (CartoDbLib.resultsCount == 1) {
+            recname = CartoDbLib.recordName;
+        }
+
+        $('#list-result-count').html(CartoDbLib.resultsCount.toLocaleString('en') + ' ' + recname + ' found')
       }
     );
   },
@@ -230,7 +259,7 @@ var CartoDbLib = {
   modalPop: function(data) {
 
     var modal_content;
-    $.get( "/templates/popup.ejs", function( template ) {
+    $.get( "/templates/popup.ejs?6", function( template ) {
         modal_content = ejs.render(template, {obj: data});
         $('#modal-pop').modal();
         $('#modal-main').html(modal_content);
@@ -281,7 +310,7 @@ var CartoDbLib = {
       CartoDbLib.whereClause += CartoDbLib.geoSearch;
     }
 
-    console.log(CartoDbLib.whereClause);
+    // console.log(CartoDbLib.whereClause);
   },
 
   setZoom: function() {
@@ -324,10 +353,10 @@ var CartoDbLib = {
   },
 
   // -----custom functions-----
-  getColor: function(type_id){
-    if (type_id == '2') return 'red';
-    if (type_id == '3') return 'blue';
-    if (type_id == '4') return 'yellow';
+  getColor: function(type){
+    if (type == 'Community Service') return 'red';
+    if (type == 'Local Government') return 'blue';
+    if (type == 'Tourist Spot') return 'yellow';
     else return 'green';
   },
   // -----end custom functions-----

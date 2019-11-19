@@ -1,31 +1,41 @@
-<h4>
-    <span class="filter-box filter-<%= CartoDbLib.getColor(obj.type_id) %>"></span>
-    <strong><%= obj.name %></strong><br>
-    <small><%= obj.type %><br><%= obj.tag %></small>
-</h4>
+<div class='row'>
+    <div class='col-md-6'>
+        <h4>
+            <span class="filter-box filter-<%= CartoDbLib.getColor(obj.type) %>"></span>
+            <strong><%= obj.name %></strong><br>
+            <small><%= obj.type %><br><%= obj.tag %></small>
+        </h4>
 
-<p><strong>Address:</strong> <%= obj.full_address %></p>
+        <p><strong>Address:</strong> <%= obj.full_address %></p>
 
-<p>
-    <% if (obj.phone_1) { %>
-            <strong>Phone:</strong> <%= obj.phone_1 %><br>
-        <% } %>
-        
-        <% if (obj.phone_2) { %>
-            <strong>Phone 2:</strong> <%= obj.phone_2 %><br>
-        <% } %>
+        <p>
+            <% if (obj.phone_1) { %>
+                    <strong>Phone:</strong> <%= obj.phone_1 %><br>
+                <% } %>
+                
+                <% if (obj.phone_2) { %>
+                    <strong>Phone 2:</strong> <%= obj.phone_2 %><br>
+                <% } %>
 
-        <% if (obj.fax) { %>
-            <strong>Fax:</strong> <%= obj.fax %><br>
-        <% } %>
-        
-        <% if (obj.website) { %>
-            <a href="http://<%= obj.website %>" target="_blank">Website</a><br>
-        <% } %>
-        
-        <% if (obj.email) { %>
-            <a href="mailto:<%= obj.email %>" target="_blank">Email</a><br>
-        <% } %>
-</p>            
+                <% if (obj.fax) { %>
+                    <strong>Fax:</strong> <%= obj.fax %><br>
+                <% } %>
+                
+                <% if (obj.website) { %>
+                    <strong>Website:</strong> <a href="http://<%= obj.website %>" target="_blank"><%= obj.website %></a><br>
+                <% } %>
+                
+                <% if (obj.email) { %>
+                    <strong>Email:</strong> <a href="mailto:<%= obj.email %>" target="_blank"><%= obj.email %></a><br>
+                <% } %>
+        </p>            
 
-<p><strong>Description</strong><br><%= obj.description %></p>
+        <p><strong>Description</strong><br><%= obj.description %></p>
+    </div>
+
+    <div class='col-md-6'>
+        <% if (obj.image_url) { %>
+            <img class="img-thumbnail" src="<%= obj.image_url %>" alt="<%= obj.name %>" title="<%= obj.name %>" />
+        <% } %>
+    </div>
+</div>
