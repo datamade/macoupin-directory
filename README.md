@@ -2,6 +2,8 @@
 
 Macoupin County’s online source for finding businesses, local governments and community services.
 
+![Probation Community Resources](https://raw.githubusercontent.com/datamade/macoupin-directory/master/images/screenshot.jpg)
+
 ## Installation
 
 <pre>
@@ -21,7 +23,9 @@ Macoupin County’s online source for finding businesses, local governments and 
 
 ## Data
 
-The data for this tool resides in a Google spreadsheet and its corresponding Carto table.
+The data for this website resides in a [Google spreadsheet](https://docs.google.com/spreadsheets/d/1cRc7u87G_NueOLANU9yA9-TErRti8Jgf2Xumv8S0L14/edit#gid=693324662) and is synced every hour to CARTO, which powers the map.
+
+For geocoding addresses, we use [Google Sheets Geocoder](https://github.com/jackdougherty/google-sheets-geocoder) - specifically, [geocoder-census-google.gs](https://raw.githubusercontent.com/JackDougherty/google-sheets-geocoder/master/geocoder-census-google.gs) - a library that converts addresses into lat-long coordinates.
 
 ## Team
 
