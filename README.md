@@ -27,6 +27,19 @@ The data for this website resides in a [Google spreadsheet](https://docs.google.
 
 For geocoding addresses, we use [Google Sheets Geocoder](https://github.com/jackdougherty/google-sheets-geocoder) - specifically, [geocoder-census-google.gs](https://raw.githubusercontent.com/JackDougherty/google-sheets-geocoder/master/geocoder-census-google.gs) - a library that converts addresses into lat-long coordinates.
 
+### How to use the Geocoder script to find the latitude and longitude of a location:
+For each new entry, you will need to geocode the address and get its latitude and longitude. 
+
+1. For the rows you want to geocode, select Full Address, Latitude, Longitude, Found, Quality, and Source.
+2. Click the “Geocoder” option in the menu, and select “with Google.” (note you can only Geocode 1,000 rows per day)
+3. Wait for results!
+
+### Rules for good spreadsheet data maintenance
+
+* Do not change the names of columns. Doing so will break the map! If you need to change the column names, please contact DataMade.
+* Do not change the url of the spreadsheet without contacting DataMade first. The spreadsheet syncs with CARTO, a third-party tool for rendering maps, and CARTO needs to know exactly where to find the spreadsheet.
+* If you add columns, data in those columns will not display on the map without updates from DataMade. Contact DataMade about showing new column data.
+
 ## Team
 
 * [Derek Eder](mailto:derek.eder@datamade.com)
