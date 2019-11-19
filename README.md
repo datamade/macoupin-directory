@@ -2,7 +2,7 @@
 
 Macoupin County’s online source for finding businesses, local governments and community services.
 
-![Probation Community Resources](https://raw.githubusercontent.com/datamade/macoupin-directory/master/images/screenshot.jpg)
+![Macoupin Resource Directory](https://raw.githubusercontent.com/datamade/macoupin-directory/master/images/screenshot.jpg)
 
 ## Installation
 
@@ -33,6 +33,8 @@ For each new entry, you will need to geocode the address and get its latitude an
 1. For the rows you want to geocode, select Full Address, Latitude, Longitude, Found, Quality, and Source.
 2. Click the “Geocoder” option in the menu, and select “with Google.” (note you can only Geocode 1,000 rows per day)
 3. Wait for results!
+
+![Geocoding in Google Sheets](https://raw.githubusercontent.com/datamade/macoupin-directory/master/images/macoupin-geocode.gif)
 
 ### Rules for good spreadsheet data maintenance
 
