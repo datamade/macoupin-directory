@@ -13,7 +13,7 @@ $(function() {
     layerUrl:     'https://datamade.carto.com/api/v2/viz/97d9e05a-1c8f-4f95-bd7e-879490999455/viz.json',
     tableName:    'macoupinresourcedirectory_macoupinil_directory_csv',
     userName:     'datamade',
-    fields :      'id, cartodb_id, the_geom, name, full_address, full_search, description, phone_1, phone_2, fax, email, website, tag, type, type_id',
+    fields :      'cartodb_id, the_geom, name, full_address, full_search, description, phone_1, phone_2, fax, email, website, tag, type',
   });
 
   var autocomplete = new google.maps.places.Autocomplete(document.getElementById('search-address'));

@@ -234,7 +234,7 @@ var CartoDbLib = {
         modal_content = ejs.render(template, {obj: data});
         $('#modal-pop').modal();
         $('#modal-main').html(modal_content);
-        $.address.parameter('modal_id', data.id);
+        $.address.parameter('modal_id', data.cartodb_id);
       });
   },
 
@@ -268,18 +268,20 @@ var CartoDbLib = {
       $.address.parameter('name', encodeURIComponent(name_search));
     }
 
-    var type_column = "type_id";
-    var searchType = type_column + " IN (-1,";
-    if ( $("#cbType1").is(':checked')) searchType += "1,";
-    if ( $("#cbType2").is(':checked')) searchType += "2,";
-    if ( $("#cbType3").is(':checked')) searchType += "3,";
-    if ( $("#cbType4").is(':checked')) searchType += "4,";
+    var type_column = "type";
+    var searchType = type_column + " IN (";
+    if ( $("#cbType1").is(':checked')) searchType += "'Business',";
+    if ( $("#cbType2").is(':checked')) searchType += "'Community Service',";
+    if ( $("#cbType3").is(':checked')) searchType += "'Local Government',";
+    if ( $("#cbType4").is(':checked')) searchType += "'Tourist Spot',";
     CartoDbLib.whereClause += " AND " + searchType.slice(0, searchType.length - 1) + ")";
     // -----end of custom filters-----
 
     if (CartoDbLib.geoSearch != "") {
       CartoDbLib.whereClause += CartoDbLib.geoSearch;
     }
+
+    console.log(CartoDbLib.whereClause);
   },
 
   setZoom: function() {
